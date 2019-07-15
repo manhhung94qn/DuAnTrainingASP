@@ -1,0 +1,10 @@
+﻿@{
+    ViewBag.titlePage = "Login";
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="text-left">
+
+    
+</div>
+

@@ -1,0 +1,55 @@
+﻿@using System.Web.Optimization;
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.titlePage</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://getbootstrap.com/docs/4.0/examples/sticky-footer-navbar/sticky-footer-navbar.css">
+
+    <!-- google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    @*@Styles.Render("~/content/css")*@
+    <link href="@Url.Content("~/Content/css/site.css")"  rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <script src="@Url.Content("~/Content/js/jquery.inputmask.bundle.js")"></script>
+
+    <style>
+        @@media screen and (max-width: 600px) {
+            .text-sx {
+                font-size: 0.7em !important;
+            }
+
+            .text-left, .text-left img, .text-left {
+                padding: 0px;
+            }
+
+            .title-sx {
+                font-size: 1.4em !important;
+            }
+        }
+
+        @@media screen and (max-width: 320px) {
+            .text-sx {
+                font-size: 0.6em !important;
+            }
+
+            .text-left, .text-left img, .text-left {
+                padding: 0px;
+            }
+        }
+    </style>
+</head>
+<body style="padding-bottom:80px">
+    @RenderBody()
+</body>
+</html>

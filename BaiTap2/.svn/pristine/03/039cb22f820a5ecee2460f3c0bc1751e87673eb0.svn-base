@@ -1,0 +1,22 @@
+﻿@{
+    Title = "AccessDenied";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="panel" style="margin-top:20px">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <div class="huge text-red">Access Denied</div>
+                    <div>This account dont access to page! Please login again!</div>
+                </div>
+            </div>
+        </div>
+        <a href="@RequestUrl">
+            <div class="panel-footer">
+                <span class="pull-left"><i class="fa fa-arrow-circle-left"></i></span>
+                <span class="pull-left">戻る</span>
+                <div class="clearfix"></div>
+            </div>
+        </a>
+    </div>
