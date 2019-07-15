@@ -15,6 +15,7 @@ namespace Structuremap.Registries
         public RepositoryRegistry()
         {
             For<IGasStationRepository>().Use<GasStationRepository>();
+            For<IUserRepository>().Use<UserRepository>();
 
         }
     }

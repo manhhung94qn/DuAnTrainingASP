@@ -10,17 +10,22 @@
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://getbootstrap.com/docs/4.0/examples/sticky-footer-navbar/sticky-footer-navbar.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
 
     <!-- google fonts -->
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
     <!-- Custom styles for this template -->
     @*@Styles.Render("~/content/css")*@
-    <link href="@Url.Content("~/Content/css/site.css")"  rel="stylesheet">
+    <link href="@Url.Content("~/Content/css/site.css")" rel="stylesheet">
+
+    @RenderSection("PageStyle", required: false)
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
     <script src="@Url.Content("~/Content/js/jquery.inputmask.bundle.js")"></script>
 
     <style>
@@ -51,5 +56,9 @@
 </head>
 <body style="padding-bottom:80px">
     @RenderBody()
+
+    @*@Scripts.Render("~/bundles/main")*@
+
+    @RenderSection("PageScripts", required: false)
 </body>
 </html>

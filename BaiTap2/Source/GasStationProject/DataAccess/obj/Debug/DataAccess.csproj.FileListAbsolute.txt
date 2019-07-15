@@ -11,3 +11,16 @@ C:\Users\HPB\Desktop\BaiTap2\Source\GasStationProject\DataAccess\obj\Debug\DataA
 C:\Users\HPB\Desktop\BaiTap2\Source\GasStationProject\DataAccess\obj\Debug\DataAccess.csproj.CopyComplete
 C:\Users\HPB\Desktop\BaiTap2\Source\GasStationProject\DataAccess\obj\Debug\DataAccess.dll
 C:\Users\HPB\Desktop\BaiTap2\Source\GasStationProject\DataAccess\obj\Debug\DataAccess.pdb
+C:\Users\manhh\Desktop\DuAnTrainingASP\BaiTap2\Source\GasStationProject\DataAccess\bin\Debug\DataAccess.dll.config
+C:\Users\manhh\Desktop\DuAnTrainingASP\BaiTap2\Source\GasStationProject\DataAccess\bin\Debug\DataAccess.dll
+C:\Users\manhh\Desktop\DuAnTrainingASP\BaiTap2\Source\GasStationProject\DataAccess\bin\Debug\DataAccess.pdb
+C:\Users\manhh\Desktop\DuAnTrainingASP\BaiTap2\Source\GasStationProject\DataAccess\bin\Debug\EntityFramework.dll
+C:\Users\manhh\Desktop\DuAnTrainingASP\BaiTap2\Source\GasStationProject\DataAccess\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\manhh\Desktop\DuAnTrainingASP\BaiTap2\Source\GasStationProject\DataAccess\bin\Debug\EntityFramework.xml
+C:\Users\manhh\Desktop\DuAnTrainingASP\BaiTap2\Source\GasStationProject\DataAccess\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\manhh\Desktop\DuAnTrainingASP\BaiTap2\Source\GasStationProject\DataAccess\bin\Debug\ja\EntityFramework.resources.dll
+C:\Users\manhh\Desktop\DuAnTrainingASP\BaiTap2\Source\GasStationProject\DataAccess\bin\Debug\ja\EntityFramework.SqlServer.resources.dll
+C:\Users\manhh\Desktop\DuAnTrainingASP\BaiTap2\Source\GasStationProject\DataAccess\obj\Debug\DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\manhh\Desktop\DuAnTrainingASP\BaiTap2\Source\GasStationProject\DataAccess\obj\Debug\DataAccess.csproj.CopyComplete
+C:\Users\manhh\Desktop\DuAnTrainingASP\BaiTap2\Source\GasStationProject\DataAccess\obj\Debug\DataAccess.dll
+C:\Users\manhh\Desktop\DuAnTrainingASP\BaiTap2\Source\GasStationProject\DataAccess\obj\Debug\DataAccess.pdb
