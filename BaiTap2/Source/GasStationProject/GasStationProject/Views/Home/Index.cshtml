@@ -1,4 +1,4 @@
-﻿@model List<DataAccess.Models.GasStation>
+﻿@*@model List<DataAccess.Models.GasStation>*@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_IndexLayout.cshtml";
@@ -20,7 +20,7 @@
                 </tr>
             </thead>
             <tbody class="body-table">
-                @foreach (var gasStation in Model)
+                @*@foreach (var gasStation in Model)
                 {
                     <tr>
                         <td>@gasStation.GasStationName</td>
@@ -35,7 +35,7 @@
                         <td>@gasStation.Rating</td>
                         <td>S</td>
                     </tr>
-                }
+                }*@
             </tbody>
 
         </table>

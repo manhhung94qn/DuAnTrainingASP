@@ -16,6 +16,6 @@
         [StringLength(5)]
         public string GasType { get; set; }
 
-        public virtual GasStation GasStation_LAPVT { get; set; }
+        public virtual GasStation GasStation { get; set; }
     }
 }
