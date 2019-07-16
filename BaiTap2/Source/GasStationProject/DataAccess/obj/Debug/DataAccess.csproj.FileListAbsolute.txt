@@ -24,3 +24,17 @@ C:\Users\manhh\Desktop\DuAnTrainingASP\BaiTap2\Source\GasStationProject\DataAcce
 C:\Users\manhh\Desktop\DuAnTrainingASP\BaiTap2\Source\GasStationProject\DataAccess\obj\Debug\DataAccess.csproj.CopyComplete
 C:\Users\manhh\Desktop\DuAnTrainingASP\BaiTap2\Source\GasStationProject\DataAccess\obj\Debug\DataAccess.dll
 C:\Users\manhh\Desktop\DuAnTrainingASP\BaiTap2\Source\GasStationProject\DataAccess\obj\Debug\DataAccess.pdb
+C:\Users\HPB\Desktop\DuAnTrainingASP\BaiTap2\Source\GasStationProject\DataAccess\bin\Debug\DataAccess.dll.config
+C:\Users\HPB\Desktop\DuAnTrainingASP\BaiTap2\Source\GasStationProject\DataAccess\bin\Debug\DataAccess.dll
+C:\Users\HPB\Desktop\DuAnTrainingASP\BaiTap2\Source\GasStationProject\DataAccess\bin\Debug\DataAccess.pdb
+C:\Users\HPB\Desktop\DuAnTrainingASP\BaiTap2\Source\GasStationProject\DataAccess\bin\Debug\EntityFramework.dll
+C:\Users\HPB\Desktop\DuAnTrainingASP\BaiTap2\Source\GasStationProject\DataAccess\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\HPB\Desktop\DuAnTrainingASP\BaiTap2\Source\GasStationProject\DataAccess\bin\Debug\EntityFramework.xml
+C:\Users\HPB\Desktop\DuAnTrainingASP\BaiTap2\Source\GasStationProject\DataAccess\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\HPB\Desktop\DuAnTrainingASP\BaiTap2\Source\GasStationProject\DataAccess\bin\Debug\ja\EntityFramework.resources.dll
+C:\Users\HPB\Desktop\DuAnTrainingASP\BaiTap2\Source\GasStationProject\DataAccess\bin\Debug\ja\EntityFramework.SqlServer.resources.dll
+C:\Users\HPB\Desktop\DuAnTrainingASP\BaiTap2\Source\GasStationProject\DataAccess\obj\Debug\DataAccess.csprojAssemblyReference.cache
+C:\Users\HPB\Desktop\DuAnTrainingASP\BaiTap2\Source\GasStationProject\DataAccess\obj\Debug\DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\HPB\Desktop\DuAnTrainingASP\BaiTap2\Source\GasStationProject\DataAccess\obj\Debug\DataAccess.csproj.CopyComplete
+C:\Users\HPB\Desktop\DuAnTrainingASP\BaiTap2\Source\GasStationProject\DataAccess\obj\Debug\DataAccess.dll
+C:\Users\HPB\Desktop\DuAnTrainingASP\BaiTap2\Source\GasStationProject\DataAccess\obj\Debug\DataAccess.pdb

@@ -36,7 +36,22 @@ namespace GasStationProject.Controllers
         [HttpPost]
         public ActionResult Login(UserLoginVM _user)
         {
-            User user = _userRepository.GetUserByEmail(_user.Email, _user.Password);
+            if (ModelState.IsValid)
+            {
+                User user = _userRepository.GetUserByEmail(_user.Email, _user.Password);
+                if (user != null)
+                {
+                    Session.Add("個人ID", new { user.UserId});
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError("", Resources.Resource.E0013);
+                }
+            } else
+            {
+
+            }
             return View();
         }
 

@@ -25,9 +25,9 @@ namespace GasStationProject.Controllers
 
         public ActionResult Index()
         {
-            var s = _gasStationRepository.GetGasStationsByLocal(1);
+            var gasStations = _gasStationRepository.GetAll().ToList();
 
-            return View();
+            return View(gasStations);
         }
 
     }

@@ -1,9 +1,88 @@
-﻿@{
-    ViewBag.titlePage = "Home";
-    ViewBag.Title = "Home";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@model List<DataAccess.Models.GasStation>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_IndexLayout.cshtml";
 }
 
-<div>
-    Xin chào, đây là trang chủ
-</div>
+@using System.Web.Optimization
+
+
+    <div class="container_table_gas">
+        <table class="table table-hover bg-white table-bordered">
+            <thead class="bg-light text-center">
+                <tr>
+                    <th scope="col">ガソリンスタンド名</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Handle</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Handle</th>
+                </tr>
+            </thead>
+            <tbody class="body-table">
+                @foreach (var gasStation in Model)
+                {
+                    <tr>
+                        <td>@gasStation.GasStationName</td>
+                        <td>
+                            @foreach (var type in gasStation.GasStationGasType)
+                            {
+                                <span>@type</span>
+                            }
+                        </td>
+                        <td>@gasStation.District.ToString()</td>
+                        <td>@gasStation.Longitude, @gasStation.Latitude</td>
+                        <td>@gasStation.Rating</td>
+                        <td>S</td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+
+        <div class="ui-layout">
+            <div class="ui-layout__sections">
+                <div class="ui-layout__section ui-layout__section--primary">
+
+                    <div class="ui-layout__item">
+                        <!-- *** YO *** -->
+                        <!-- start rendering 'admin/reports/summary_cards/report_summary' with locals '[:section]'-->
+                        <!-- start ui_card -->
+                        <section class="ui-card reports-index-card">
+                            <!-- SKELETON LOADING -->
+                            <div class="loading-wrapper">
+                                <div class="title-block">
+                                    <div class="loading title"></div>
+                                    <div class="loading content"></div>
+                                    <div class="loading content last-row"></div>
+                                </div>
+                                <div class="title-block">
+                                    <div class="loading title"></div>
+                                    <div class="loading content"></div>
+                                    <div class="loading content last-row"></div>
+                                </div>
+                                <div class="list-block">
+                                    <div class='loading content line-item'></div>
+                                    <div class='loading content line-item-last'></div>
+                                </div>
+                            </div>
+                            <!-- END OF SKELETON LOADING -->
+                        </section>
+                        <!-- finish rendering ui_card -->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+@section PageScript {
+
+    @Scripts.Render("~/content/HomeControler")
+
+}
+

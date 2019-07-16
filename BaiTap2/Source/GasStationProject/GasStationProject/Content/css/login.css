@@ -2,6 +2,7 @@
     display: flex;
     min-height: 100vh;
     flex-direction: column;
+    padding-top: 2em;
 }
 
 main {
@@ -26,3 +27,20 @@ body {
     border-bottom: 2px solid #e91e63;
     box-shadow: none;
 }
+label {
+    padding-left: 10px;
+}
+label.active {
+    padding-bottom: 4px;
+}
+
+.container-form {
+    width: 100%;
+}
+
+@media only screen and (min-width: 768px) {
+    .container-form {
+        width: 768px;
+    }
+}
+

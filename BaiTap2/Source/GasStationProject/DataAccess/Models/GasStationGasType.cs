@@ -1,4 +1,4 @@
-namespace DataAccess.Models
+ namespace DataAccess.Models
 {
     using System;
     using System.Collections.Generic;
