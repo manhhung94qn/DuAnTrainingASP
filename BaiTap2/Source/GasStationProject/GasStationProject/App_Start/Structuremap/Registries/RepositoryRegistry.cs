@@ -16,6 +16,9 @@ namespace Structuremap.Registries
         {
             For<IGasStationRepository>().Use<GasStationRepository>();
             For<IUserRepository>().Use<UserRepository>();
+            For<IDistrictRepository>().Use<DistrictRepository>();
+            For<IGasStationGasTypeRepository>().Use<GasStationGasTypeRepository>();
+            For<IMTpyeRepository>().Use<MTypeRepository>();
 
         }
     }

@@ -63,9 +63,11 @@
     <Compile Include="Repositories\IRepositories\IDistrictRepository.cs" />
     <Compile Include="Repositories\IRepositories\IGasStationGasTypeRepository.cs" />
     <Compile Include="Repositories\IRepositories\IGasStationRepository.cs" />
+    <Compile Include="Repositories\IRepositories\IMTpyeRepository.cs" />
     <Compile Include="Repositories\IRepositories\IRepositoryBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IRepositories\IUserRepository.cs" />
+    <Compile Include="Repositories\MTypeRepository.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="UnitOfWork\IUnitOfWork.cs" />

@@ -10,7 +10,7 @@ namespace GasStationProject.Models
     {
         public string GasStationName { get; set; }
 
-        public List<string> GasStyle { get; set; }
+        public string GasType { get; set; }
 
         public string DistrictName { get; set; }
 

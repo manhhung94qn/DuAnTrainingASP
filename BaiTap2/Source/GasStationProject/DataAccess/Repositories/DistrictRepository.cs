@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Repositories
 {
-    class DistrictRepository: RepositoryBase<M_District>, IDistrictRepository
+    public class DistrictRepository: RepositoryBase<M_District>, IDistrictRepository
     {
         public DistrictRepository(GasStationDBContext dbContext) : base(dbContext)
         {

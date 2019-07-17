@@ -1,26 +1,59 @@
 ﻿$(document).ready(function(){
-    console.log("HIHIHI");
-
-    // $("body").click(function(){
-    //     $.ajax({
-    //         type: "POST",
-    //         url: "../Gasstation/listGasstation",
-    //         data: {  },
-    //         dataType: "json",
-    //         success: function (response) {
-    //             console.log(response);
-    //         }
-    //     });
-    // });
+    let token = $("[name=__RequestVerificationToken]").val();
+    renderData(token);  
 
 })
 
-var renderTable = (listGas)=> {
-    
+$("#search-with-query").click(function(){
+    let token = $("[name=__RequestVerificationToken]").val();
+    renderData(token);
+})
 
+
+let renderData = (token)=>{
+    $(".body-table").html('');
+    $(".container_table_gas").append(renderWating());
+    let dataSend = {
+        gasName: $("#input-name-gas").val() ,
+        
+        gasType:  $("input[name='selectTypeGas']:checked").val()?$("input[name='selectTypeGas']:checked").val(): null ,
+        districtID: $("#selectDistrict").val() ?  $("#selectDistrict").val(): null
+
+    }
+    $.ajax({
+        type: "POST",
+        url: "../Home/gastationFillter",
+        data: {__RequestVerificationToken: token, data: JSON.stringify(dataSend)},
+        dataType: "json",
+        success: function (response) {
+            $(".body-table").html( renderTableBody(response) );
+            $(".ui-layout").remove();
+        }}
+        );
 }
 
-var renderWating = ()=>{
+let renderTableBody = (listGasVM)=> {
+    let result = ``;
+    for (let item of listGasVM) {
+        result += ` 
+            <tr>
+                <td> ${item.GasStationName} </td>
+                <td> ${item.GasType} </td>
+                <td> ${item.DistrictName} </td>
+                <td> ${item.Longitude}, ${item.Latitude} </td>
+                <td> ${item.Rating} </td>
+                <td>
+                    <button class="btn btn-info">Edit</button>
+                    <button class="btn btn-danger">Del</button>
+                </td>
+            </tr>
+        `
+    }
+    return result;
+}
+
+
+let renderWating = ()=>{
     return (`
     <div class="ui-layout">
         <div class="ui-layout__sections">
@@ -56,4 +89,5 @@ var renderWating = ()=>{
     </div>    
     `);
 }
+
 

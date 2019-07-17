@@ -1,81 +1,93 @@
-﻿@*@model List<DataAccess.Models.GasStation>*@
+﻿
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_IndexLayout.cshtml";
+    var listDistrist = ViewBag.listDistrist;
+    var listGatype = ViewBag.listGasType;
 }
 
 @using System.Web.Optimization
 
 
+@Html.AntiForgeryToken()
+
+<h2 class="text-center mb-5">ガソリンスタンド一覧</h2>
+
+
+<div class="group-data">
+
+    <div class="card mb-0 pb-0">
+        <div class="card-header">
+            Filter
+        </div>
+        <div class="card-body">
+            <form class="px-lg-5">
+                <div class="form-group d-flex">
+                    <label for="input-name-gas" class="w-25">ガソリンスタンド名: </label>
+                    <input type="text" class="form-control w-100" id="input-name-gas" placeholder="Enter name gas station ...">
+                </div>
+                <div class="form-group d-flex">
+                    <label class="w-25">種類:  </label>
+                    <div class="w-100">
+                        <div class="form-check ">
+                            <input class="form-check-input" type="radio" name="selectTypeGas" id="selectAll" value="" checked>
+                            <label class="form-check-label" for="selectAll">
+                                All
+                            </label>
+                        </div>
+                        @foreach (var item in listGatype)
+                        {
+                            <div class="form-check ">
+                                <input class="form-check-input" type="radio" name="selectTypeGas" id=@item.TypeText value=@item.TypeCode>
+                                <label class="form-check-label" for="@item.TypeText">
+                                    @item.TypeText
+                                </label>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <div class="form-group d-flex">
+                    <label class="w-25" for="selectDistrict">地区: </label>
+                    <select class="form-control w-100" id="selectDistrict">
+                        <option value="">Không chọn</option>
+                        @foreach (var item in listDistrist)
+                        {
+                            <option value="@item.DistrictId">@item.DistrictName</option>
+                        }
+
+                    </select>
+                </div>
+
+            </form>
+            <div class="w-100 text-center">
+                <button class="btn btn-primary w-25" id="search-with-query">検索</button>
+            </div>
+        </div>
+    </div>
+
+    @* Begin table *@
     <div class="container_table_gas">
+        @*Begin Form show gas station*@
         <table class="table table-hover bg-white table-bordered">
             <thead class="bg-light text-center">
                 <tr>
                     <th scope="col">ガソリンスタンド名</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
+                    <th scope="col">種類</th>
+                    <th scope="col">地区</th>
+                    <th scope="col">　Longitude, Latitude</th>
+                    <th scope="col">　評価</th>
+                    <th scope="col">Option</th>
                 </tr>
             </thead>
-            <tbody class="body-table">
-                @*@foreach (var gasStation in Model)
-                {
-                    <tr>
-                        <td>@gasStation.GasStationName</td>
-                        <td>
-                            @foreach (var type in gasStation.GasStationGasType)
-                            {
-                                <span>@type</span>
-                            }
-                        </td>
-                        <td>@gasStation.District.ToString()</td>
-                        <td>@gasStation.Longitude, @gasStation.Latitude</td>
-                        <td>@gasStation.Rating</td>
-                        <td>S</td>
-                    </tr>
-                }*@
-            </tbody>
-
+            <tbody class="body-table"></tbody>
         </table>
+        @*End Form show gas station*@
 
-        <div class="ui-layout">
-            <div class="ui-layout__sections">
-                <div class="ui-layout__section ui-layout__section--primary">
-
-                    <div class="ui-layout__item">
-                        <!-- *** YO *** -->
-                        <!-- start rendering 'admin/reports/summary_cards/report_summary' with locals '[:section]'-->
-                        <!-- start ui_card -->
-                        <section class="ui-card reports-index-card">
-                            <!-- SKELETON LOADING -->
-                            <div class="loading-wrapper">
-                                <div class="title-block">
-                                    <div class="loading title"></div>
-                                    <div class="loading content"></div>
-                                    <div class="loading content last-row"></div>
-                                </div>
-                                <div class="title-block">
-                                    <div class="loading title"></div>
-                                    <div class="loading content"></div>
-                                    <div class="loading content last-row"></div>
-                                </div>
-                                <div class="list-block">
-                                    <div class='loading content line-item'></div>
-                                    <div class='loading content line-item-last'></div>
-                                </div>
-                            </div>
-                            <!-- END OF SKELETON LOADING -->
-                        </section>
-                        <!-- finish rendering ui_card -->
-                    </div>
-
-                </div>
-            </div>
-        </div>
 
     </div>
+
+</div>
 
 
 
