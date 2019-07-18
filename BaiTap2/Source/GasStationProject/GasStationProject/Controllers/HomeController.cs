@@ -41,6 +41,7 @@ namespace GasStationProject.Controllers
         {
             ViewBag.listDistrist = _districtRepository.GetAll().OrderBy(x=>x.DistrictName);
             ViewBag.listGasType = _mTpyeRepository.GetAll().Where(x => x.TypeType == 3).ToList();
+            ViewBag.pageCount = Math.Ceiling(Convert.ToDecimal(_gasStationRepository.GetAll().Count()/10));
             return View();
         }
 
@@ -54,6 +55,7 @@ namespace GasStationProject.Controllers
             string queryGasName = queryData["gasName"];
             string querygasTpye = queryData["gasType"] ;
             string queryDistrict = queryData["districtID"];
+            int queryPage = Convert.ToInt32(queryData["selectPage"]);
             
             // Dung để kiểm tra xem có tồn tại gastype hay không.
             bool checkType(string qr, List<DataAccess.Models.GasStationGasType> gt)
@@ -68,7 +70,7 @@ namespace GasStationProject.Controllers
             var gasStations = _gasStationRepository.GetAll().Where(x=>
                 (queryGasName != null ? x.GasStationName.Contains(queryGasName) :true) &&
                 ( querygasTpye != null ? checkType(querygasTpye, x.GasStationGasType.ToList()): true ) &&
-                (queryDistrict != null ? x.District == (long)Convert.ToDouble(queryDistrict): true)
+                (queryDistrict != null ? x.District == (long)Convert.ToDouble(queryDistrict): true) 
             ).ToList();
 
             List<GasStationVM> result = new List<GasStationVM>();
@@ -92,7 +94,7 @@ namespace GasStationProject.Controllers
                 gasStationVM.Rating = _mTpyeRepository.getTypeText(item.Rating, 4);
                 result.Add(gasStationVM);
             }
-            return Json(result);
+            return Json(result.Skip((queryPage-1)*10).Take(10));
         }
 
     }

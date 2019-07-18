@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
     let token = $("[name=__RequestVerificationToken]").val();
     renderData(token);
-    $("#map").hide()
+    $("#map").hide();
 
 })
 
@@ -9,22 +9,34 @@ $("#search-with-query").click(function () {
     let token = $("[name=__RequestVerificationToken]").val();
     renderData(token);
 })
+
 $(".name-gasStation").click(function () {
     console.log("OKI")
 })
 
+{
+    var pageCurent = 1;
+    $(".select-page").click(function () {
+        let token = $("[name=__RequestVerificationToken]").val();
+        pageCurent = parseInt($(this).text());
+        if (pageCurent == 1) {
+            $(".previous-btn").addClass("disabled")
+        } else { $(".previous-btn").removeClass("disabled") }
+        if (pageCurent == $(".select-page").length) {
+            $("next-btn").addClass("disabled")
+        } else { $("next-btn").removeClass("disabled") }
+        renderData(token, pageCurent);
+    })
+}
 
-
-
-let renderData = (token) => {
+let renderData = (token, page=1) => {
     $(".body-table").html('');
     $(".container_table_gas").append(renderWating());
     let dataSend = {
         gasName: $("#input-name-gas").val(),
-
         gasType: $("input[name='selectTypeGas']:checked").val() ? $("input[name='selectTypeGas']:checked").val() : null,
-        districtID: $("#selectDistrict").val() ? $("#selectDistrict").val() : null
-
+        districtID: $("#selectDistrict").val() ? $("#selectDistrict").val() : null,
+        selectPage: parseInt(page)
     }
     $.ajax({
         type: "POST",
@@ -32,7 +44,11 @@ let renderData = (token) => {
         data: { __RequestVerificationToken: token, data: JSON.stringify(dataSend) },
         dataType: "json",
         success: function (response) {
-            $(".body-table").html(renderTableBody(response));
+            if (response) {
+                $(".body-table").html(`<p>登録しました。</p>`);
+            } else {
+                $(".body-table").html(renderTableBody(response));
+            }
             $(".ui-layout").remove();
         }
     }
@@ -58,7 +74,6 @@ let renderTableBody = (listGasVM) => {
     }
     return result;
 }
-
 
 let renderWating = () => {
     return (`
@@ -96,8 +111,6 @@ let renderWating = () => {
     </div>    
     `);
 }
-
-
 
 {
     var longiTude = 150.644;

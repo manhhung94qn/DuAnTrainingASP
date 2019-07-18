@@ -19,5 +19,10 @@ namespace DataAccess.Repositories
         {
             return _dbContext.GasStation.Where(m => m.District == local).ToList();
         }
+        
+        public bool isNameExist(string name) {
+            int i = _dbContext.GasStation.Where(x => x.GasStationName.ToLower() == name.ToLower()).Count();
+            return i > 0 ? true : false;
+        }
     }
 }

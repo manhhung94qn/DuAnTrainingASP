@@ -10,5 +10,6 @@ namespace DataAccess.Repositories.IRepositories
     public interface IGasStationRepository: IRepositoryBase<GasStation>
     {
         List<GasStation> GetGasStationsByLocal(long local);
+        bool isNameExist(string name);
     }
 }

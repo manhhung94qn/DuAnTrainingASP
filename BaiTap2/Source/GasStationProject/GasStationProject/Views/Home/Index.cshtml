@@ -1,21 +1,18 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_IndexLayout.cshtml";
     var listDistrist = ViewBag.listDistrist;
     var listGatype = ViewBag.listGasType;
+    var pageCount = ViewBag.pageCount;
 }
 
 @using System.Web.Optimization
-
 
 @Html.AntiForgeryToken()
 
 <h2 class="text-center mb-5">ガソリンスタンド一覧</h2>
 
-
 <div class="group-data">
-
     @* Begin filter *@
     <div class="card mb-0 pb-0">
         <div class="card-header">
@@ -67,7 +64,6 @@
         </div>
     </div>
     @* End filter *@
-
     @* Begin table *@
     <div class="container_table_gas">
         @*Begin Form show gas station*@
@@ -86,6 +82,21 @@
                 @* javascript will process *@
             </tbody>
         </table>
+
+        <center>
+            <nav aria-label="...">
+                <ul class="pagination">
+                    <li class="page-item disabled previous-btn">Previous</li>
+                    <li class="page-item active">1</li>
+                    @for (int i = 1; i < pageCount; i++)
+                    {
+                        <li class="page-item select-page">@(i + 1)</li>
+                    }
+                    <li class="page-item next-btn">Next</li>
+                </ul>
+            </nav>
+        </center>
+    
         @*End Form show gas station*@
 
 
@@ -94,15 +105,11 @@
 </div>
 
 
-
-
 @section PageScript {
-
     @Scripts.Render("~/content/HomeControler")
-
 }
+
 @section PageStyle {
     @Styles.Render("~/content/HomeCSS")
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSxLoeVH330_x1JYvbWXnNmGFAKFKOPeE"
-            async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSxLoeVH330_x1JYvbWXnNmGFAKFKOPeE" async defer></script>
 }
