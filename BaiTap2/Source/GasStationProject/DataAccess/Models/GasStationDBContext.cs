@@ -50,5 +50,6 @@ namespace DataAccess.Models
                 .Property(e => e.UserType)
                 .IsUnicode(false);
         }
+
     }
 }

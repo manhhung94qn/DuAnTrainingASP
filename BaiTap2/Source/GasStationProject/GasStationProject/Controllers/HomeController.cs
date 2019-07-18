@@ -44,6 +44,8 @@ namespace GasStationProject.Controllers
             return View();
         }
 
+        
+
         [ValidateAntiForgeryToken]
         public JsonResult gastationFillter(string data)
         {

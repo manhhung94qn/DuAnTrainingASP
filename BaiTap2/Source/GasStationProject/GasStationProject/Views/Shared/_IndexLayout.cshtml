@@ -18,26 +18,12 @@
     <meta name="keywords" content="au theme template">
     <!-- Title Page-->
     <title>Admin Manage</title>
-    <style>
-         /* Always set the map height explicitly to define the size of the div
-        * element that contains the map. */
-         #map {
-             height: 100%;
-         }
-         /* Optional: Makes the sample page fill the window. */
-         html, body {
-             height: 100%;
-             margin: 0;
-             padding: 0;
-         }
-    </style>
-
     @Styles.Render("~/content/CoreCSS")
-
-
+    @RenderSection("PageStyle", required: false)
 </head>
 
 <body class="animsition">
+    <div id="map"></div>
     <div class="page-wrapper">
         <!-- HEADER MOBILE-->
         <header class="header-mobile d-block d-lg-none">
@@ -174,27 +160,14 @@
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
                         <li class="active has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-tachometer-alt"></i>Dashboard
+                            <a class="js-arrow" href="../Home/Index">
+                                <i class="fas fa-tachometer-alt"></i>Home
                             </a>
-                            <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <li>
-                                    <a href="index.html">Dashboard 1</a>
-                                </li>
-                                <li>
-                                    <a href="index2.html">Dashboard 2</a>
-                                </li>
-                                <li>
-                                    <a href="index3.html">Dashboard 3</a>
-                                </li>
-                                <li>
-                                    <a href="index4.html">Dashboard 4</a>
-                                </li>
-                            </ul>
+
                         </li>
                         <li>
-                            <a href="chart.html">
-                                <i class="fas fa-chart-bar"></i>Charts
+                            <a href="~/Gasstation/Add">
+                                <i class="fas fa-plus-circle"></i>Add Gastation
                             </a>
                         </li>
                         <li>
@@ -279,8 +252,6 @@
         </aside>
         <!-- END MENU SIDEBAR-->
         <!-- PAGE CONTAINER-->
-
-
         <div class="page-container">
             <!-- HEADER DESKTOP-->
             <header class="header-desktop">
@@ -468,27 +439,19 @@
             <!-- END MAIN CONTENT-->
             <!-- END PAGE CONTAINER-->
         </div>
-
     </div>
 
 
-    <div id="map"></div>
-    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>    
+    @RenderSection("PageScript", required: false)
+    @RenderSection("Validation", required: false)
     @Scripts.Render("~/content/CoreScript")
 
-    @RenderSection("PageScript", required: false)
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtSypYIyeMBNwSdpLpP7Ko6oitjU4UaMc&callback=initMap"
-            async defer></script>
-    <script>
-        var map;
-        function initMap() {
-            map = new google.maps.Map(document.getElementById('map'), {
-                center: { lat: -34.397, lng: 150.644 },
-                zoom: 8
-            });
-        }
-    </script>
+
+
+
 
 </body>
 

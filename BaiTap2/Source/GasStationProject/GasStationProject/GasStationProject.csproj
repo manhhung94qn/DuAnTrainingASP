@@ -204,6 +204,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\GasStationAddVM.cs" />
     <Compile Include="Models\GasStationVM.cs" />
     <Compile Include="Models\UserLoginVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -213,12 +214,14 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="App_Core\WebViewPageExtention.cs" />
+    <Compile Include="Validations\GasStationAddValidator.cs" />
     <Compile Include="Validations\UserLoginValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Content Include="Content\css\font-face.css" />
+    <Content Include="Content\css\HomeStyle.css" />
     <Content Include="Content\css\login.css" />
     <Content Include="Content\css\site.css" />
     <Content Include="Content\css\theme.css" />
@@ -255,8 +258,11 @@
     <Content Include="Content\images\icon\logo-mini.png" />
     <Content Include="Content\images\icon\logo-white.png" />
     <Content Include="Content\images\icon\Untitled-1.jpg" />
+    <Content Include="Content\js\GasStationAdd.js" />
     <Content Include="Content\js\HomeController.js" />
     <Content Include="Content\js\jquery.inputmask.bundle.js" />
+    <Content Include="Content\js\jquery.validate.min.js" />
+    <Content Include="Content\js\jquery.validate.unobtrusive.min.js" />
     <Content Include="Content\js\main.js" />
     <Content Include="Content\js\site.js" />
     <Content Include="Content\vendor\animsition\animsition.min.css" />
@@ -455,6 +461,8 @@
     <Content Include="Views\Shared\_IndexLayout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\waiting_loding_teamplate.cshtml" />
+    <Content Include="Views\Gasstation\Update.cshtml" />
+    <Content Include="Views\Gasstation\Add.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -484,7 +492,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="bin\" />
-    <Folder Include="Views\Gasstation\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj">

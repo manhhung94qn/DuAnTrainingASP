@@ -15,6 +15,8 @@ namespace GasStationProject
             bundles.Add(new StyleBundle("~/content/Login").Include("~/Content/css/login.css"));
 
             bundles.Add(new ScriptBundle("~/content/HomeControler").Include("~/Content/js/HomeController.js"));
+            bundles.Add(new StyleBundle("~/content/HomeCSS").Include("~/Content/css/HomeStyle.css"));
+            bundles.Add(new ScriptBundle("~/content/addGastation").Include("~/Content/js/jquery.validate.min.js", "~/Content/js/jquery.validate.unobtrusive.min.js", "~/Content/js/GasStationAdd.js"));
 
 
 
@@ -32,7 +34,8 @@ namespace GasStationProject
                 "~/Content/vendor/perfect-scrollbar/perfect-scrollbar.js",
                 "~/Content/vendor/chartjs/Chart.bundle.min.js",
                 "~/Content/vendor/select2/select2.min.js",
-                "~/Content/js/main.js")  );
+                "~/Content/js/main.js",
+                "~/Content/js/jquery.inputmask.bundle.js")  );
 
             bundles.Add(new StyleBundle("~/content/CoreCSS").Include(
                 "~/Content/css/font-face.css",

@@ -97,7 +97,7 @@ namespace GasStationProject.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}を入力してください。.
+        ///   Looks up a localized string similar to を入力してください。.
         /// </summary>
         public static string E0001 {
             get {

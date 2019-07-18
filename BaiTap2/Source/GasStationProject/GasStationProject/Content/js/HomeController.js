@@ -1,43 +1,50 @@
-﻿$(document).ready(function(){
+﻿$(document).ready(function () {
     let token = $("[name=__RequestVerificationToken]").val();
-    renderData(token);  
+    renderData(token);
+    $("#map").hide()
 
 })
 
-$("#search-with-query").click(function(){
+$("#search-with-query").click(function () {
     let token = $("[name=__RequestVerificationToken]").val();
     renderData(token);
 })
+$(".name-gasStation").click(function () {
+    console.log("OKI")
+})
 
 
-let renderData = (token)=>{
+
+
+let renderData = (token) => {
     $(".body-table").html('');
     $(".container_table_gas").append(renderWating());
     let dataSend = {
-        gasName: $("#input-name-gas").val() ,
-        
-        gasType:  $("input[name='selectTypeGas']:checked").val()?$("input[name='selectTypeGas']:checked").val(): null ,
-        districtID: $("#selectDistrict").val() ?  $("#selectDistrict").val(): null
+        gasName: $("#input-name-gas").val(),
+
+        gasType: $("input[name='selectTypeGas']:checked").val() ? $("input[name='selectTypeGas']:checked").val() : null,
+        districtID: $("#selectDistrict").val() ? $("#selectDistrict").val() : null
 
     }
     $.ajax({
         type: "POST",
         url: "../Home/gastationFillter",
-        data: {__RequestVerificationToken: token, data: JSON.stringify(dataSend)},
+        data: { __RequestVerificationToken: token, data: JSON.stringify(dataSend) },
         dataType: "json",
         success: function (response) {
-            $(".body-table").html( renderTableBody(response) );
+            $(".body-table").html(renderTableBody(response));
             $(".ui-layout").remove();
-        }}
-        );
+        }
+    }
+    );
 }
 
-let renderTableBody = (listGasVM)=> {
+let renderTableBody = (listGasVM) => {
     let result = ``;
     for (let item of listGasVM) {
         result += ` 
             <tr>
-                <td> ${item.GasStationName} </td>
+                <td class="name-gasStation w-25" data-long=${item.Longitude} data-lati=${item.Latitude}> ${item.GasStationName} </td>
                 <td> ${item.GasType} </td>
                 <td> ${item.DistrictName} </td>
                 <td> ${item.Longitude}, ${item.Latitude} </td>
@@ -53,7 +60,7 @@ let renderTableBody = (listGasVM)=> {
 }
 
 
-let renderWating = ()=>{
+let renderWating = () => {
     return (`
     <div class="ui-layout">
         <div class="ui-layout__sections">
@@ -91,3 +98,43 @@ let renderWating = ()=>{
 }
 
 
+
+{
+    var longiTude = 150.644;
+    var latiTude = -34.397;
+    function initMap() {
+        var uluru = { lat: latiTude, lng: longiTude };
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 8,
+            center: uluru
+        });
+        var marker = new google.maps.Marker({
+            position: uluru,
+            map: map,
+            icon: "https://developers.google.com/maps/documentation/javascript/examples/full/images/library_maps.png"
+        });
+    }
+
+    let ishowMap = false;
+    $("body").delegate(".name-gasStation", "mouseover", function (e) {
+        longiTude = $(this).data().long;
+        latiTude = $(this).data().lati;
+        initMap();
+        $("#map").css("left", e.pageX - $("#map").width() / 2).css("top", e.pageY - $("#map").height() + 2);
+        $("#map").show();
+    });
+
+    $("body").delegate("#map", "mouseout", function (e) {
+        ishowMap = true;
+    });
+    $("body").delegate("#map", "mouseout", function (e) {
+        setTimeout(function () { if (ishowMap) { ishowMap = false; } }, 500);
+        $("#map").hide();
+    });
+
+    $("body").delegate(".name-gasStation", "mouseout", function (e) {
+        if (!ishowMap) {
+            $("#map").hide();
+        }
+    });
+}

@@ -1,0 +1,124 @@
+﻿@model GasStationProject.Models.GasStationAddVM
+
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_IndexLayout.cshtml";
+    var listDistrist = ViewBag.listDistrist;
+    var listGatype = ViewBag.listGasType;
+    var ratingList = ViewBag.ratingList;
+}
+
+
+@using (Html.BeginForm("Add", "GasStation"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4 class="text-center">ガソリンスタンド一登録</h4>
+        <hr />
+
+        <div class="form-group d-flex">
+            <label for="inputnamegas" class="col-md-2">ガソリンスタンド名: </label>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.GasStationName, new { htmlAttributes = new { @class = "form-control w-100", placeholder = "Enter name gas station ...", id = "inputnamegas", autofocus = true } })
+                @Html.ValidationMessageFor(model => model.GasStationName, "", new { @class = "text-danger text-left w-100 d-block" })
+            </div>
+        </div>
+
+        <div class="form-group d-flex group-gastype">
+            <label class="col-md-2">種類:  </label>
+            <div class="col-md-8">
+                @foreach (var item in listGatype)
+                {
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="selectTypeGas" id=@item.TypeText value=@item.TypeCode>
+                        <label class="form-check-label" for="@item.TypeText">
+                            @item.TypeText
+                        </label>
+                    </div>
+                }
+                @Html.ValidationMessageFor(model => model.Gatype, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Gatype, new { htmlAttributes = new {style="display: none;" } })
+            </div>
+        </div>
+
+        <div class="form-group d-flex">
+            <label for="input-logitude" class="col-md-2">Longitude: </label>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.Longitude, new { htmlAttributes = new { @class = "form-control w-100", placeholder = "Enter logintude ...", id = "input-logitude" } })
+                @Html.ValidationMessageFor(model => model.Longitude, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group d-flex">
+            <label for="input-latitude" class="col-md-2">Latitude: </label>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.Latitude, new { htmlAttributes = new { @class = "form-control w-100", placeholder = "Enter latitude ...", id = "input-latitude" } })
+                @Html.ValidationMessageFor(model => model.Latitude, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group d-flex">
+            <label class="col-md-2" for="selectDistrict">地区: </label>
+            <div class="col-md-8">
+                <select class="w-100" id="selectDistrict">
+                    @foreach (var item in listDistrist)
+                    {
+                        <option class="w-100" value="@item.DistrictId">@item.DistrictName</option>
+                    }
+                </select>
+                @Html.ValidationMessageFor(model => model.District, "", new { @class = "text-danger" })
+                @Html.EditorFor(Model => Model.District, new { htmlAttributes = new { style="display: none;" } })
+            </div>
+        </div>
+
+        <div class="form-group d-flex">
+            <label for="input-address" class="col-md-2">住所: </label>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control w-100", placeholder = "Enter address ...", id = "input-address" } })
+                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group d-flex">
+            <label for="input-timeopening" class="col-md-2">開館時間: </label>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.OpeningTime, new { htmlAttributes = new { @class = "form-control w-100", placeholder = "Enter time opening ...", id = "input-timeopening" } })
+                @Html.ValidationMessageFor(model => model.OpeningTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group d-flex">
+            <label for="input-timeopening" class="col-md-2">評価: </label>
+            <div class="col-md-8 rating-gas">
+                @foreach (var item in ratingList)
+                {
+                    <div class="form-check form-check-inline mr-5 pr-5">
+                        <input class="form-check-input" name="rating-gas" type="radio" id=@item.TypeCode value=@item.TypeCode>
+                        <label class="form-check-label" for=@item.TypeCode>@item.TypeText</label>
+                    </div>
+                }
+                @Html.EditorFor(model => model.Rating, new { htmlAttributes = new { @class = "form-control w-100", style="display: none;" } })
+                @Html.ValidationMessageFor(model => model.Rating, "", new { @class = "text-danger"})
+            </div>
+        </div>
+
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger text-left w-100 d-block" })
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Gasstation/Add")
+</div>
+
+@section PageScript {
+    @Scripts.Render("~/content/addGastation")
+}

@@ -16,12 +16,13 @@
 
 <div class="group-data">
 
+    @* Begin filter *@
     <div class="card mb-0 pb-0">
         <div class="card-header">
             Filter
         </div>
         <div class="card-body">
-            <form class="px-lg-5">
+            <div class="px-lg-5">
                 <div class="form-group d-flex">
                     <label for="input-name-gas" class="w-25">ガソリンスタンド名: </label>
                     <input type="text" class="form-control w-100" id="input-name-gas" placeholder="Enter name gas station ...">
@@ -59,12 +60,13 @@
                     </select>
                 </div>
 
-            </form>
+            </div>
             <div class="w-100 text-center">
                 <button class="btn btn-primary w-25" id="search-with-query">検索</button>
             </div>
         </div>
     </div>
+    @* End filter *@
 
     @* Begin table *@
     <div class="container_table_gas">
@@ -80,7 +82,9 @@
                     <th scope="col">Option</th>
                 </tr>
             </thead>
-            <tbody class="body-table"></tbody>
+            <tbody class="body-table">
+                @* javascript will process *@
+            </tbody>
         </table>
         @*End Form show gas station*@
 
@@ -97,4 +101,8 @@
     @Scripts.Render("~/content/HomeControler")
 
 }
-
+@section PageStyle {
+    @Styles.Render("~/content/HomeCSS")
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSxLoeVH330_x1JYvbWXnNmGFAKFKOPeE"
+            async defer></script>
+}
