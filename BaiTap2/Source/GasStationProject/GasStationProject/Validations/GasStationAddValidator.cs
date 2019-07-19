@@ -17,7 +17,8 @@ namespace GasStationProject.Validations
             RuleFor(x => x.Latitude).NotEmpty().WithMessage(Resources.Resource.E0001);
             RuleFor(x => x.Gatype).NotEmpty().WithMessage(Resources.Resource.E0001);
             RuleFor(x=>x.Rating).NotEmpty().WithMessage(Resources.Resource.E0001);
-            RuleFor(x=>x.Address).NotEmpty().WithMessage(Resources.Resource.E0001);
+            RuleFor(x=>x.Address).NotEmpty().WithMessage(Resources.Resource.E0001).MaximumLength(250).WithMessage(Resources.Resource.E0004);
+            RuleFor(x => x.OpeningTime).MaximumLength(50).WithMessage(Resources.Resource.E0004);
             RuleFor(x=>x.District).NotEmpty().WithMessage(Resources.Resource.E0001);
 
         }

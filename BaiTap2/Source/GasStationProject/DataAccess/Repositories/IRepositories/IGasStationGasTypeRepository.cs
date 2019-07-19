@@ -9,6 +9,6 @@ namespace DataAccess.Repositories.IRepositories
 {
     public interface IGasStationGasTypeRepository: IRepositoryBase<GasStationGasType>
     {
-
+        List<GasStationGasType> findByGasStationId(long Id);
     }
 }

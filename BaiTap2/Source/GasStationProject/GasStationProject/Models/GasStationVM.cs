@@ -8,6 +8,7 @@ namespace GasStationProject.Models
 {
     public class GasStationVM
     {
+        public long GasStationId { get; set; }
         public string GasStationName { get; set; }
 
         public string GasType { get; set; }

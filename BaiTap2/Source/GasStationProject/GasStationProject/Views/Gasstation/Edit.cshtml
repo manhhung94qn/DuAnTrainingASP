@@ -9,9 +9,10 @@
 }
 
 
-@using (Html.BeginForm("Add", "GasStation"))
+@using (Html.BeginForm("Edit", "GasStation"))
 {
     @Html.AntiForgeryToken()
+    @Html.HiddenFor(Model => Model.GasStationId);
 
     <div class="form-horizontal">
         <h4 class="text-center">ガソリンスタンド一登録</h4>
@@ -30,15 +31,20 @@
             <div class="col-md-8">
                 @foreach (var item in listGatype)
                 {
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="selectTypeGas" id=@item.TypeText value=@item.TypeCode>
-                        <label class="form-check-label" for="@item.TypeText">
-                            @item.TypeText
-                        </label>
-                    </div>
+                <div class="form-check">
+                    @if (Model.Gatype != null &&Model.Gatype.Contains(item.TypeCode))
+                    {
+                        <input class="form-check-input" type="checkbox" checked name="selectTypeGas" id=@item.TypeText value=@item.TypeCode>
+                    }
+                    else
+                    { <input class="form-check-input" type="checkbox" name="selectTypeGas" id=@item.TypeText value=@item.TypeCode>}
+                    <label class="form-check-label" for="@item.TypeText">
+                        @item.TypeText
+                    </label>
+                </div>
                 }
                 @Html.ValidationMessageFor(model => model.Gatype, "", new { @class = "text-danger" })
-                @Html.EditorFor(model => model.Gatype, new { htmlAttributes = new {style="display: none;" } })
+                @Html.EditorFor(model => model.Gatype, new { htmlAttributes = new { style = "display: none;" } })
             </div>
         </div>
 
@@ -64,11 +70,18 @@
                 <select class="w-100" id="selectDistrict">
                     @foreach (var item in listDistrist)
                     {
-                        <option class="w-100" value="@item.DistrictId">@item.DistrictName</option>
+                        if ( (@item.DistrictId.ToString() == Model.District.ToString()) )
+                        {
+                            <option class="w-100" value="@item.DistrictId" selected >@item.DistrictName</option>
+                        }
+                        else
+                        {
+                            <option class="w-100" value="@item.DistrictId">@item.DistrictName</option>
+                        }
                     }
                 </select>
                 @Html.ValidationMessageFor(model => model.District, "", new { @class = "text-danger" })
-                @Html.EditorFor(Model => Model.District, new { htmlAttributes = new { style="display: none;" } })
+                @Html.EditorFor(Model => Model.District, new { htmlAttributes = new { style = "display: none;" } })
             </div>
         </div>
 
@@ -93,18 +106,22 @@
             <div class="col-md-8 rating-gas">
                 @foreach (var item in ratingList)
                 {
-                    <div class="form-check form-check-inline mr-5 pr-5">
+                <div class="form-check form-check-inline mr-5 pr-5">
+                    @if (Model.Rating == item.TypeCode)
+                    {
+                        <input class="form-check-input" checked name="rating-gas" type="radio" id=@item.TypeCode value=@item.TypeCode>
+                    }
+                    else
+                    {
                         <input class="form-check-input" name="rating-gas" type="radio" id=@item.TypeCode value=@item.TypeCode>
-                        <label class="form-check-label" for=@item.TypeCode>@item.TypeText</label>
-                    </div>
+                    }
+                    <label class="form-check-label" for=@item.TypeCode>@item.TypeText</label>
+                </div>
                 }
-                @Html.EditorFor(model => model.Rating, new { htmlAttributes = new { @class = "form-control w-100", style="display: none;" } })
-                @Html.ValidationMessageFor(model => model.Rating, "", new { @class = "text-danger"})
+                @Html.EditorFor(model => model.Rating, new { htmlAttributes = new { @class = "form-control w-100", style = "display: none;" } })
+                @Html.ValidationMessageFor(model => model.Rating, "", new { @class = "text-danger" })
             </div>
         </div>
-
-
-
 
         <div class="form-group d-flex justify-content-md-around mt-4">
             <div class="col-md-3 order-11">
@@ -112,7 +129,7 @@
             </div>
             <div class="col-md-3 order-1">
                 <button class="btn btn-danger w-100">
-                    @Html.ActionLink("戻る", "Index", "Home" , null , htmlAttributes: new {  @class="text-white d-block w-100" } )
+                    @Html.ActionLink("戻る", "Index", "Home", null, htmlAttributes: new { @class = "text-white d-block w-100" })
                 </button>
             </div>
         </div>

@@ -12,6 +12,12 @@ namespace DataAccess.Repositories
     {
         public GasStationGasTypeRepository(GasStationDBContext dbContext) : base(dbContext)
         {
+            
+        }
+
+        public List<GasStationGasType> findByGasStationId(long Id)
+        {
+            return _dbContext.GasStationGasType.Where(x => x.GasStationId == Id).ToList();
         }
     }
 }

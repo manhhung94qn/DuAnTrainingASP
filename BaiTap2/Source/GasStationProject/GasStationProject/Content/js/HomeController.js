@@ -16,16 +16,14 @@ $(".name-gasStation").click(function () {
 
 {
     var pageCurent = 1;
-    $(".select-page").click(function () {
+    $(".select-page").click(function () {        
+        for (const item of $(".page-item")) {
+            $(item).removeClass("active");
+        }
         let token = $("[name=__RequestVerificationToken]").val();
         pageCurent = parseInt($(this).text());
-        if (pageCurent == 1) {
-            $(".previous-btn").addClass("disabled")
-        } else { $(".previous-btn").removeClass("disabled") }
-        if (pageCurent == $(".select-page").length) {
-            $("next-btn").addClass("disabled")
-        } else { $("next-btn").removeClass("disabled") }
         renderData(token, pageCurent);
+        $(this).parent().addClass("active");
     })
 }
 
@@ -45,9 +43,9 @@ let renderData = (token, page=1) => {
         dataType: "json",
         success: function (response) {
             if (response) {
-                $(".body-table").html(`<p>登録しました。</p>`);
-            } else {
                 $(".body-table").html(renderTableBody(response));
+            } else {
+                $(".body-table").html(`<p>登録しました。</p>`);                
             }
             $(".ui-layout").remove();
         }
@@ -65,9 +63,9 @@ let renderTableBody = (listGasVM) => {
                 <td> ${item.DistrictName} </td>
                 <td> ${item.Longitude}, ${item.Latitude} </td>
                 <td> ${item.Rating} </td>
-                <td>
-                    <button class="btn btn-info">Edit</button>
-                    <button class="btn btn-danger">Del</button>
+                <td class="d-flex  justify-content-between" >
+                    <a href="../Gasstation/edit/${item.GasStationId}" class="btn btn-info">Edit</a>
+                    <a href="../Gasstation/delete/${item.GasStationId}" class="btn btn-danger">Del</a>
                 </td>
             </tr>
         `

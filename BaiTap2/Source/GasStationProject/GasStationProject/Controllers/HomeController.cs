@@ -71,7 +71,7 @@ namespace GasStationProject.Controllers
                 (queryGasName != null ? x.GasStationName.Contains(queryGasName) :true) &&
                 ( querygasTpye != null ? checkType(querygasTpye, x.GasStationGasType.ToList()): true ) &&
                 (queryDistrict != null ? x.District == (long)Convert.ToDouble(queryDistrict): true) 
-            ).ToList();
+            ).Skip((queryPage - 1) * 10).Take(10).ToList();
 
             List<GasStationVM> result = new List<GasStationVM>();
             foreach (var item in gasStations)
@@ -88,13 +88,14 @@ namespace GasStationProject.Controllers
                     }
                     gasStationVM.GasType += ", " + _mTpyeRepository.getTypeText(type.GasType, 3);
                 }
+                gasStationVM.GasStationId = item.GasStationId;
                 gasStationVM.DistrictName = _districtRepository.FindById(item.District).DistrictName;
                 gasStationVM.Longitude = item.Longitude;
                 gasStationVM.Latitude = item.Latitude;
                 gasStationVM.Rating = _mTpyeRepository.getTypeText(item.Rating, 4);
                 result.Add(gasStationVM);
             }
-            return Json(result.Skip((queryPage-1)*10).Take(10));
+            return Json(result);
         }
 
     }

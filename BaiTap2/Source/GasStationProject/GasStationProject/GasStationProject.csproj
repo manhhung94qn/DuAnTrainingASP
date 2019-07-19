@@ -463,6 +463,8 @@
     <Content Include="Views\Shared\waiting_loding_teamplate.cshtml" />
     <Content Include="Views\Gasstation\Update.cshtml" />
     <Content Include="Views\Gasstation\Add.cshtml" />
+    <Content Include="Views\Gasstation\Edit.cshtml" />
+    <Content Include="Views\Gasstation\Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

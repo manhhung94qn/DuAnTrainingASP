@@ -65,42 +65,40 @@
     </div>
     @* End filter *@
     @* Begin table *@
-    <div class="container_table_gas">
-        @*Begin Form show gas station*@
-        <table class="table table-hover bg-white table-bordered">
-            <thead class="bg-light text-center">
-                <tr>
-                    <th scope="col">ガソリンスタンド名</th>
-                    <th scope="col">種類</th>
-                    <th scope="col">地区</th>
-                    <th scope="col">　Longitude, Latitude</th>
-                    <th scope="col">　評価</th>
-                    <th scope="col">Option</th>
-                </tr>
-            </thead>
-            <tbody class="body-table">
-                @* javascript will process *@
-            </tbody>
-        </table>
+<div class="container_table_gas">
+    @*Begin Form show gas station*@
+    <table class="table table-hover bg-white table-bordered">
+        <thead class="bg-light text-center">
+            <tr>
+                <th scope="col">ガソリンスタンド名</th>
+                <th scope="col">種類</th>
+                <th scope="col">地区</th>
+                <th scope="col">　Longitude, Latitude</th>
+                <th scope="col">　評価</th>
+                <th scope="col">Option</th>
+            </tr>
+        </thead>
+        <tbody class="body-table">
+            @* javascript will process *@
+        </tbody>
+    </table>
 
-        <center>
-            <nav aria-label="...">
-                <ul class="pagination">
-                    <li class="page-item disabled previous-btn">Previous</li>
-                    <li class="page-item active">1</li>
-                    @for (int i = 1; i < pageCount; i++)
-                    {
-                        <li class="page-item select-page">@(i + 1)</li>
-                    }
-                    <li class="page-item next-btn">Next</li>
-                </ul>
-            </nav>
-        </center>
-    
-        @*End Form show gas station*@
-
-
+    <div class="d-flex justify-content-around mb-5">
+        <nav aria-label="...">
+            <ul class="pagination">
+                <li class="page-item active"><button class="page-link select-page">1</button></li>
+                @for (int i = 1; i <= pageCount ; i++)
+                {
+                    <li class="page-item"><button class="page-link select-page">@(i + 1)</button></li>
+                }
+            </ul>
+        </nav>
     </div>
+
+    @*End Form show gas station*@
+
+
+</div>
 
 </div>
 
