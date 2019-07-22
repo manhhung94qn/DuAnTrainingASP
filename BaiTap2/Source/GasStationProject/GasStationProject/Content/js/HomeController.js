@@ -58,7 +58,7 @@ let renderTableBody = (listGasVM) => {
     for (let item of listGasVM) {
         result += ` 
             <tr>
-                <td class="name-gasStation w-25" data-long=${item.Longitude} data-lati=${item.Latitude}> ${item.GasStationName} </td>
+                <td class="name-gasStation w-25" data-long=${item.Longitude} data-lati=${item.Latitude}> <a href="./Feedback/Detail/${item.GasStationId}">${item.GasStationName}</a> </td>
                 <td> ${item.GasType} </td>
                 <td> ${item.DistrictName} </td>
                 <td> ${item.Longitude}, ${item.Latitude} </td>
@@ -116,7 +116,7 @@ let renderWating = () => {
     function initMap() {
         var uluru = { lat: latiTude, lng: longiTude };
         var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 8,
+            zoom: 12,
             center: uluru
         });
         var marker = new google.maps.Marker({
@@ -128,11 +128,13 @@ let renderWating = () => {
 
     let ishowMap = false;
     $("body").delegate(".name-gasStation", "mouseover", function (e) {
+        $("#map").hide();
         longiTude = $(this).data().long;
         latiTude = $(this).data().lati;
         initMap();
-        $("#map").css("left", e.pageX - $("#map").width() / 2).css("top", e.pageY - $("#map").height() + 2);
-        $("#map").show();
+        $("#map").css("left", e.pageX - $("#map").width() / 2).css("top", e.pageY - $("#map").height() -20);
+        setTimeout(function(){$("#map").show()},1000);
+        console.log($(this).offset(), this.clientY);
     });
 
     $("body").delegate("#map", "mouseout", function (e) {

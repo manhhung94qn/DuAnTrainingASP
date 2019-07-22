@@ -17,7 +17,7 @@ namespace GasStationProject
             bundles.Add(new ScriptBundle("~/content/HomeControler").Include("~/Content/js/HomeController.js"));
             bundles.Add(new StyleBundle("~/content/HomeCSS").Include("~/Content/css/HomeStyle.css"));
             bundles.Add(new ScriptBundle("~/content/addGastation").Include("~/Content/js/jquery.validate.min.js", "~/Content/js/jquery.validate.unobtrusive.min.js", "~/Content/js/GasStationAdd.js"));
-
+            bundles.Add(new ScriptBundle("~/content/Feedback").Include("~/Content/js/FeedbackController.js"));
 
 
 

@@ -19,6 +19,7 @@ namespace Structuremap.Registries
             For<IDistrictRepository>().Use<DistrictRepository>();
             For<IGasStationGasTypeRepository>().Use<GasStationGasTypeRepository>();
             For<IMTpyeRepository>().Use<MTypeRepository>();
+            For<IFeedbackRepository>().Use<FeedbackRepository>();
 
         }
     }

@@ -58,9 +58,11 @@
     <Compile Include="Models\M_Type.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Repositories\DistrictRepository.cs" />
+    <Compile Include="Repositories\FeedbackRepository.cs" />
     <Compile Include="Repositories\GasStationGasTypeRepository.cs" />
     <Compile Include="Repositories\GasStationRepository.cs" />
     <Compile Include="Repositories\IRepositories\IDistrictRepository.cs" />
+    <Compile Include="Repositories\IRepositories\IFeedbackRepository.cs" />
     <Compile Include="Repositories\IRepositories\IGasStationGasTypeRepository.cs" />
     <Compile Include="Repositories\IRepositories\IGasStationRepository.cs" />
     <Compile Include="Repositories\IRepositories\IMTpyeRepository.cs" />

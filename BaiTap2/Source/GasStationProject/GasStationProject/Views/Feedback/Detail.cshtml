@@ -1,0 +1,103 @@
+﻿@model GasStationProject.Models.FeedbackVM
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_IndexLayout.cshtml";
+    var countPage = ViewBag.countPage;
+}
+
+<h4 class="text-center">ガソリンスタンド一登録</h4>
+
+<div class="container">
+    <div class="card mb-0 pb-0">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3">
+                    ガソリンスタンド名:
+                </div>
+                <div class="col-md-9">
+                    @Model.GasStationName
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    種類:
+                </div>
+                <div class="col-md-9">
+                    @Model.GasType
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    住所:
+                </div>
+                <div class="col-md-9">
+                    @Model.GasAddress
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    開館時間:
+                </div>
+                <div class="col-md-9">
+                    @Model.OpenTime
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    評価:
+                </div>
+                <div class="col-md-9">
+                    @Model.Rating
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h5 class="card-header">Feedback</h5>
+        <div class="card-body content-feedback">
+            @(GasStationProject.Resources.Resource.I0003)
+        </div>
+    </div>
+    <div class="mb-5 mt-0 d-flex justify-content-center w-100">
+        <nav aria-label="...">
+            <ul class="pagination">
+                <li class="page-item disabled  controll controllerPre">
+                    <span class="page-link">Previous</span>
+                </li>
+                <li class="page-item active"><span class="page-link">1</span></li>
+                @if (countPage > 1)
+                {
+                    for (int i = 1; i < countPage / 10 + 1; i++)
+                    {
+                        <li class="page-item"><span class="page-link">@(i + 1)</span></li>
+                    }
+                }
+                @if (countPage <= 10)
+                {
+                    <li class="page-item disabled controll">
+                        <span class="page-link">Next</span>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item controll">
+                        <span class="page-link">Next</span>
+                    </li>
+                }
+            </ul>
+        </nav>
+    </div>
+
+    <div class="col-md-3 order-1 mb-5">
+        <button class="btn btn-success w-100">
+            @Html.ActionLink("戻る", "Index", "Home", null, htmlAttributes: new { @class = "text-white d-block w-100" })
+        </button>
+    </div>
+
+</div>
+
+@section PageScript {
+    @Scripts.Render("~/content/Feedback")
+}
+

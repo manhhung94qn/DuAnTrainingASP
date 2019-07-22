@@ -196,6 +196,7 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\StructuremapMvc.cs" />
     <Compile Include="App_Core\ControllerExtention.cs" />
+    <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\GasstationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
@@ -204,6 +205,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\FeedbackVM.cs" />
     <Compile Include="Models\GasStationAddVM.cs" />
     <Compile Include="Models\GasStationVM.cs" />
     <Compile Include="Models\UserLoginVM.cs" />
@@ -258,6 +260,7 @@
     <Content Include="Content\images\icon\logo-mini.png" />
     <Content Include="Content\images\icon\logo-white.png" />
     <Content Include="Content\images\icon\Untitled-1.jpg" />
+    <Content Include="Content\js\FeedbackController.js" />
     <Content Include="Content\js\GasStationAdd.js" />
     <Content Include="Content\js\HomeController.js" />
     <Content Include="Content\js\jquery.inputmask.bundle.js" />
@@ -465,6 +468,7 @@
     <Content Include="Views\Gasstation\Add.cshtml" />
     <Content Include="Views\Gasstation\Edit.cshtml" />
     <Content Include="Views\Gasstation\Delete.cshtml" />
+    <Content Include="Views\Feedback\Detail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
