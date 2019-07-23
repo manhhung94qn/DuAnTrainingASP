@@ -7,27 +7,16 @@
 
 $("#search-with-query").click(function () {
     let token = $("[name=__RequestVerificationToken]").val();
+    curentPage = 1;
     renderData(token);
+    renderPagination();
 })
 
-$(".name-gasStation").click(function () {
-    console.log("OKI")
-})
 
-{
-    var pageCurent = 1;
-    $(".select-page").click(function () {        
-        for (const item of $(".page-item")) {
-            $(item).removeClass("active");
-        }
-        let token = $("[name=__RequestVerificationToken]").val();
-        pageCurent = parseInt($(this).text());
-        renderData(token, pageCurent);
-        $(this).parent().addClass("active");
-    })
-}
 
-let renderData = (token, page=1) => {
+
+//get data and render data
+let renderData = (token, page = 1) => {
     $(".body-table").html('');
     $(".container_table_gas").append(renderWating());
     let dataSend = {
@@ -42,17 +31,21 @@ let renderData = (token, page=1) => {
         data: { __RequestVerificationToken: token, data: JSON.stringify(dataSend) },
         dataType: "json",
         success: function (response) {
-            if (response) {
-                $(".body-table").html(renderTableBody(response));
-            } else {
-                $(".body-table").html(`<p>登録しました。</p>`);                
-            }
-            $(".ui-layout").remove();
+            setTimeout(function () {
+                if (response) {
+                    $(".body-table").html(renderTableBody(response));
+                } else {
+                    $(".body-table").html(`<p>登録しました。</p>`);
+                }
+                
+                $(".ui-layout").remove();
+            }, 500);
         }
-    }
-    );
+    });
+
 }
 
+//Render table body
 let renderTableBody = (listGasVM) => {
     let result = ``;
     for (let item of listGasVM) {
@@ -62,7 +55,7 @@ let renderTableBody = (listGasVM) => {
                 <td> ${item.GasType} </td>
                 <td> ${item.DistrictName} </td>
                 <td> ${item.Longitude}, ${item.Latitude} </td>
-                <td> ${item.Rating} </td>
+                <td class="text-center"><img src="./content/images/${item.Rating}.png" class="img-fluid" /></td>
                 <td class="d-flex  justify-content-between" >
                     <a href="../Gasstation/edit/${item.GasStationId}" class="btn btn-info">Edit</a>
                     <a href="../Gasstation/delete/${item.GasStationId}" class="btn btn-danger">Del</a>
@@ -73,6 +66,7 @@ let renderTableBody = (listGasVM) => {
     return result;
 }
 
+//render preload
 let renderWating = () => {
     return (`
     <div class="ui-layout">
@@ -110,6 +104,8 @@ let renderWating = () => {
     `);
 }
 
+
+//Setup for map
 {
     var longiTude = 150.644;
     var latiTude = -34.397;
@@ -127,14 +123,14 @@ let renderWating = () => {
     }
 
     let ishowMap = false;
+    var cleartime = null;
     $("body").delegate(".name-gasStation", "mouseover", function (e) {
         $("#map").hide();
         longiTude = $(this).data().long;
         latiTude = $(this).data().lati;
         initMap();
-        $("#map").css("left", e.pageX - $("#map").width() / 2).css("top", e.pageY - $("#map").height() -20);
-        setTimeout(function(){$("#map").show()},1000);
-        console.log($(this).offset(), this.clientY);
+        $("#map").css("left", e.pageX - $("#map").width() / 2).css("top", e.pageY - $("#map").height() - 20);
+        cleartime = setTimeout(function () { $("#map").show() }, 500);
     });
 
     $("body").delegate("#map", "mouseout", function (e) {
@@ -147,7 +143,157 @@ let renderWating = () => {
 
     $("body").delegate(".name-gasStation", "mouseout", function (e) {
         if (!ishowMap) {
+            clearTimeout(cleartime);
             $("#map").hide();
         }
     });
+}
+
+var curentPage = 1;
+
+$("body").delegate( ".page-item" , "click", function () {
+    let setPage;
+    if ($(this).hasClass("controll")) {
+        if (!$(this).hasClass("disabled")) {
+            if ($(this).hasClass("controllerPre")) {
+                setPage = curentPage - 1;
+            }
+            if ($(this).hasClass("controllerNext")) {
+                setPage = curentPage + 1
+            }
+            if ($(this).hasClass("controllerFirst")) {
+                setPage = 1
+            }
+            if ($(this).hasClass("controllerLast")) {
+                setPage = $(".page-item").length - 4;
+            }
+        } else { return }
+
+    } else {
+        setPage = parseInt($(this).children().html()) ? parseInt($(this).children().html()) : curentPage;
+    }
+
+    if (setPage != curentPage) {
+        let $listPageItem = $(".page-item");
+        for (const item of $listPageItem) {
+            if ($(item).children().html() == setPage) {
+                $(item).addClass("active")
+            } else { $(item).removeClass("active") }
+        }
+        if (setPage == 1) {
+            $($listPageItem[0]).addClass("disabled");
+            $($listPageItem[1]).addClass("disabled");
+        } else { $($listPageItem[0]).removeClass(" disabled"); $($listPageItem[1]).removeClass(" disabled") }
+        if (setPage == $listPageItem.length - 4) {
+            $($listPageItem[$listPageItem.length - 2]).addClass("disabled");
+            $($listPageItem[$listPageItem.length - 1]).addClass("disabled")
+        } else {
+            $($listPageItem[$listPageItem.length - 2]).removeClass("disabled");
+            $($listPageItem[$listPageItem.length - 1]).removeClass("disabled")
+        }
+        curentPage = setPage;
+        let token = $("[name=__RequestVerificationToken]").val();
+        renderData(token, curentPage);
+    }
+});
+
+// $(".page-item").click(function () {
+
+//     let setPage;
+
+//     if ($(this).hasClass("controll")) {
+//         if (!$(this).hasClass("disabled")) {
+//             if ($(this).hasClass("controllerPre")) {
+//                 setPage = curentPage - 1;
+//             }
+//             if ($(this).hasClass("controllerNext")) {
+//                 setPage = curentPage + 1
+//             }
+//             if ($(this).hasClass("controllerFirst")) {
+//                 setPage = 1
+//             }
+//             if ($(this).hasClass("controllerLast")) {
+//                 setPage = $(".page-item").length - 4;
+//             }
+//         } else { return }
+
+//     } else {
+//         setPage = parseInt($(this).children().html()) ? parseInt($(this).children().html()) : curentPage;
+//     }
+
+//     if (setPage != curentPage) {
+//         let $listPageItem = $(".page-item");
+//         for (const item of $listPageItem) {
+//             if ($(item).children().html() == setPage) {
+//                 $(item).addClass("active")
+//             } else { $(item).removeClass("active") }
+//         }
+//         if (setPage == 1) {
+//             $($listPageItem[0]).addClass("disabled");
+//             $($listPageItem[1]).addClass("disabled");
+//         } else { $($listPageItem[0]).removeClass(" disabled"); $($listPageItem[1]).removeClass(" disabled") }
+//         if (setPage == $listPageItem.length - 4) {
+//             $($listPageItem[$listPageItem.length - 2]).addClass("disabled");
+//             $($listPageItem[$listPageItem.length - 1]).addClass("disabled")
+//         } else {
+//             $($listPageItem[$listPageItem.length - 2]).removeClass("disabled");
+//             $($listPageItem[$listPageItem.length - 1]).removeClass("disabled")
+//         }
+//         curentPage = setPage;
+//         let token = $("[name=__RequestVerificationToken]").val();
+//         renderData(token, curentPage);
+//         // renderData(idGastation, curentPage);
+//     }
+// })
+
+let renderPagination = () => {
+    $.ajax({
+        type: "POST",
+        url: "Home/getCountPage",
+        success: function (response) {
+            console.log(response.page)
+            $(".pagination-box").html(setPagination(response.page));
+        }
+    });
+}
+
+let setPagination = (countPage) => {
+    let result = `
+    <nav aria-label="...">
+        <ul class="pagination">
+            <li class="page-item disabled  controll controllerFirst">
+                <span class="page-link">First</span>
+            </li>
+            <li class="page-item disabled  controll controllerPre">
+                <span class="page-link">Previous</span>
+            </li>
+            <li class="page-item active"><span class="page-link">1</span></li>   `;
+    if (countPage > 1) {
+        console.log(countPage);
+        for (let i = 2; i <= Math.ceil(countPage/10) ; i++) {
+            result += `<li class="page-item"><span class="page-link">${i}</span></li>`
+        }
+    }
+
+    if (countPage <= 10) {
+        result += `
+        <li class="page-item disabled controll controllerNext">
+            <span class="page-link">Next</span>
+        </li>
+        <li class="page-item disabled  controll controllerLast">
+            <span class="page-link">Last</span>
+        </li> `
+    } else {
+        result += `
+        <li class="page-item controll controllerNext">
+            <span class="page-link">Next</span>
+        </li>
+        <li class="page-item  controll controllerLast">
+            <span class="page-link">Last</span>
+        </li>
+        `
+    }
+    result += ` </ul> </nav>`
+
+    return result;
 }

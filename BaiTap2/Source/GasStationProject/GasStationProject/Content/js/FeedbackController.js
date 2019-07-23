@@ -3,8 +3,6 @@ var hrefLink = new URL(url_string);
 var idGastation = hrefLink.pathname.split("/")[3];
 var startText = $(".content-feedback").html();
 $(document).ready(function () {
-
-
     renderData(idGastation);
 })
 
@@ -35,13 +33,26 @@ let renderData = (_idGas, _page = 1) => {
     })
 }
 var curentPage = 1;
+
 $(".page-item").click(function () {
     let setPage;
 
-    if ($(this).hasClass("controll") && !$(this).hasClass("disabled")) {
-        if ($(this).hasClass("controllerPre")) {
-            setPage = curentPage - 1;
-        } else { setPage = curentPage + 1 }
+    if ( $(this).hasClass("controll") ) {        
+        if( !$(this).hasClass("disabled") ){
+            if ($(this).hasClass("controllerPre")) {
+                setPage = curentPage - 1;
+            }
+            if($(this).hasClass("controllerNext")){
+                setPage = curentPage + 1
+            }
+            if($(this).hasClass("controllerFirst")){
+                setPage = 1
+            }
+            if( $(this).hasClass("controllerLast")){
+                setPage = $(".page-item").length - 4;
+            }
+        } else { return }
+
     } else {
         setPage = parseInt($(this).children().html()) ? parseInt($(this).children().html()) : curentPage;
     }
@@ -54,17 +65,19 @@ $(".page-item").click(function () {
             } else { $(item).removeClass("active") }
         }
         if (setPage == 1) {
-            $($listPageItem[0]).addClass("disabled")
-        } else { $($listPageItem[0]).removeClass(" disabled") }
-        if (setPage == $listPageItem.length - 2) {
+            $($listPageItem[0]).addClass("disabled");
+            $($listPageItem[1]).addClass("disabled");
+        } else { $($listPageItem[0]).removeClass(" disabled"); $($listPageItem[1]).removeClass(" disabled") }
+        if (setPage == $listPageItem.length - 4) {
+            $($listPageItem[$listPageItem.length -2]).addClass("disabled");            
             $($listPageItem[$listPageItem.length - 1]).addClass("disabled")
-        } else { $($listPageItem[$listPageItem.length - 1]).removeClass("disabled") }
+        } else { 
+            $($listPageItem[$listPageItem.length - 2]).removeClass("disabled"); 
+            $($listPageItem[$listPageItem.length - 1]).removeClass("disabled") 
+        }
         curentPage = setPage;
         renderData(idGastation, curentPage);
     }
-
-
-
     // renderData(idGastation, getPage);
 })
 

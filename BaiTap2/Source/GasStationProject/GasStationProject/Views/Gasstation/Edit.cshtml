@@ -115,7 +115,7 @@
                     {
                         <input class="form-check-input" name="rating-gas" type="radio" id=@item.TypeCode value=@item.TypeCode>
                     }
-                    <label class="form-check-label" for=@item.TypeCode>@item.TypeText</label>
+                    <label class="form-check-label" for=@item.TypeCode> <img src="~/Content/images/@(item.TypeText).png" />   @item.TypeText</label>
                 </div>
                 }
                 @Html.EditorFor(model => model.Rating, new { htmlAttributes = new { @class = "form-control w-100", style = "display: none;" } })

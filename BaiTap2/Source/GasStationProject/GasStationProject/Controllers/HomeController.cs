@@ -16,7 +16,7 @@ using System.Web.Script.Serialization;
 
 namespace GasStationProject.Controllers
 {
-
+    
     public class HomeController : ControllerExtention
     {
         private IGasStationRepository _gasStationRepository;
@@ -41,11 +41,12 @@ namespace GasStationProject.Controllers
         {
             ViewBag.listDistrist = _districtRepository.GetAll().OrderBy(x=>x.DistrictName);
             ViewBag.listGasType = _mTpyeRepository.GetAll().Where(x => x.TypeType == 3).ToList();
-            ViewBag.pageCount = Math.Ceiling(Convert.ToDecimal(_gasStationRepository.GetAll().Count()/10));
+            ViewBag.pageCount = _gasStationRepository.GetAll().Count();
             return View();
         }
 
-        
+        static public int countPage;
+
 
         [ValidateAntiForgeryToken]
         public JsonResult gastationFillter(string data)
@@ -66,12 +67,15 @@ namespace GasStationProject.Controllers
                     }
                     return false;
                 }
-            
-            var gasStations = _gasStationRepository.GetAll().Where(x=>
+
+
+            var gasStationsN = _gasStationRepository.GetAll().Where(x=>
                 (queryGasName != null ? x.GasStationName.Contains(queryGasName) :true) &&
                 ( querygasTpye != null ? checkType(querygasTpye, x.GasStationGasType.ToList()): true ) &&
                 (queryDistrict != null ? x.District == (long)Convert.ToDouble(queryDistrict): true) 
-            ).Skip((queryPage - 1) * 10).Take(10).ToList();
+            );
+            countPage = gasStationsN.Count();
+            var gasStations = gasStationsN.Skip((queryPage - 1) * 10).Take(10).ToList();
 
             List<GasStationVM> result = new List<GasStationVM>();
             foreach (var item in gasStations)
@@ -96,6 +100,11 @@ namespace GasStationProject.Controllers
                 result.Add(gasStationVM);
             }
             return Json(result);
+        }
+
+        public JsonResult getCountPage()
+        {
+            return Json(new { page = countPage});
         }
 
     }

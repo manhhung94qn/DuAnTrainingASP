@@ -92,7 +92,7 @@
                     <div class="form-check form-check-inline mr-5 pr-5">
                         @if (Model.Rating == item.TypeCode)
                         {
-                            <p>@item.TypeText</p>
+                            <p> <img src="~/Content/images/@(item.TypeText).png"/> @item.TypeText</p>
                         }                        
                     </div>
                 }
