@@ -22,31 +22,37 @@ namespace GasStationProject.Controllers
         private IGasStationRepository _gasStationRepository;
         private IGasStationGasTypeRepository _gasStationGasTypeRepository;
         private IDistrictRepository _districtRepository;
-        private IMTpyeRepository _mTpyeRepository;
+        private IMTpyeRepository _mTypeRepository;
+        static public int countPage;
         public HomeController(IUnitOfWork unitOfWork, ILogWrapper logWrapper, 
             IGasStationRepository gasStationRepository,
             IGasStationGasTypeRepository gasStationGasTypeRepository,
             IDistrictRepository districtRepository,
-            IMTpyeRepository mTpyeRepository
+            IMTpyeRepository mTypeRepository
             ) : base(unitOfWork, logWrapper)
         {
             _gasStationRepository = gasStationRepository;
             _gasStationGasTypeRepository = gasStationGasTypeRepository;
             _districtRepository = districtRepository;
-            _mTpyeRepository = mTpyeRepository;
+            _mTypeRepository = mTypeRepository;
         }
 
 
         public ActionResult Index()
         {
             ViewBag.listDistrist = _districtRepository.GetAll().OrderBy(x=>x.DistrictName);
-            ViewBag.listGasType = _mTpyeRepository.GetAll().Where(x => x.TypeType == 3).ToList();
+            ViewBag.listGasType = _mTypeRepository.GetAll().Where(x => x.TypeType == 3).ToList();
             ViewBag.pageCount = _gasStationRepository.GetAll().Count();
             return View();
         }
 
-        static public int countPage;
-
+        public ActionResult MapList()
+        {
+            ViewBag.listDistrist = _districtRepository.GetAll().OrderBy(x => x.DistrictName);
+            ViewBag.listGasType = _mTypeRepository.GetAll().Where(x => x.TypeType == 3).ToList();
+            ViewBag.pageCount = _gasStationRepository.GetAll().Count();
+            return View();
+        }
 
         [ValidateAntiForgeryToken]
         public JsonResult gastationFillter(string data)
@@ -63,21 +69,25 @@ namespace GasStationProject.Controllers
                 {
                     foreach (var item in gt)
                     {
-                        if(item.GasType == qr) { return true; }
+                        if(qr.Contains(item.GasType)) { return true; }
                     }
                     return false;
                 }
 
-
+            //Fillter theo các điều kiện truyền vào
             var gasStationsN = _gasStationRepository.GetAll().Where(x=>
-                (queryGasName != null ? x.GasStationName.Contains(queryGasName) :true) &&
+                (queryGasName != null ?  x.GasStationName.ToLowerInvariant().Contains(queryGasName) :true) &&
                 ( querygasTpye != null ? checkType(querygasTpye, x.GasStationGasType.ToList()): true ) &&
                 (queryDistrict != null ? x.District == (long)Convert.ToDouble(queryDistrict): true) 
             );
+
             countPage = gasStationsN.Count();
+
             var gasStations = gasStationsN.Skip((queryPage - 1) * 10).Take(10).ToList();
 
             List<GasStationVM> result = new List<GasStationVM>();
+
+            //Add gasstartion vào bên trong result
             foreach (var item in gasStations)
             {
                 GasStationVM gasStationVM = new GasStationVM();
@@ -87,18 +97,19 @@ namespace GasStationProject.Controllers
                 {
                     if (count == 0)
                     {
-                        gasStationVM.GasType += _mTpyeRepository.getTypeText(type.GasType, 3);
+                        gasStationVM.GasType += _mTypeRepository.getTypeText(type.GasType, 3);
                         count++;
                     }
-                    gasStationVM.GasType += ", " + _mTpyeRepository.getTypeText(type.GasType, 3);
+                    gasStationVM.GasType += ", " + _mTypeRepository.getTypeText(type.GasType, 3);
                 }
                 gasStationVM.GasStationId = item.GasStationId;
                 gasStationVM.DistrictName = _districtRepository.FindById(item.District).DistrictName;
                 gasStationVM.Longitude = item.Longitude;
                 gasStationVM.Latitude = item.Latitude;
-                gasStationVM.Rating = _mTpyeRepository.getTypeText(item.Rating, 4);
+                gasStationVM.Rating = _mTypeRepository.getTypeText(item.Rating, 4);
                 result.Add(gasStationVM);
             }
+
             return Json(result);
         }
 

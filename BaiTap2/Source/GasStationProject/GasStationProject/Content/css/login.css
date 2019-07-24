@@ -43,4 +43,7 @@ label.active {
         width: 768px;
     }
 }
+#Password:focus {
+    background: white;
+}
 

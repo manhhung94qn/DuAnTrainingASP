@@ -25,7 +25,7 @@ let renderData = (_idGas, _page = 1) => {
             if (response.length > 0) {
                 setTimeout(function(){
                     $(".content-feedback").html(renderListFeedback(response))
-                }, 500);
+                }, 100);
             } else {
                 $(".content-feedback").html(startText)
             }

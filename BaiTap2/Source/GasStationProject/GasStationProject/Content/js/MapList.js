@@ -1,7 +1,8 @@
 ﻿$(document).ready(function () {
     let token = $("[name=__RequestVerificationToken]").val();
     renderData(token);
-    $("#map").hide();
+
+
 })
 
 $("#search-with-query").click(function () {
@@ -14,7 +15,7 @@ $("#search-with-query").click(function () {
 //get data and render data
 let renderData = (token, page = 1) => {
     $(".body-table").html('');
-    $(".render-waiting").html(renderWating());
+    $(".container_table_gas").append(renderWating());
     let dataSend = {
         gasName: $("#input-name-gas").val().toLowerCase(),
         gasType: gasType ? gasType : null,
@@ -27,41 +28,65 @@ let renderData = (token, page = 1) => {
         data: { __RequestVerificationToken: token, data: JSON.stringify(dataSend) },
         dataType: "json",
         success: function (response) {
-            setTimeout(function () {
-                if (response.length>0) {
-                    $(".body-table").html(renderTableBody(response));
-                } else {
-                    $(".render-waiting").html(`<p>登録しました。</p>`);
-                }                
-                $(".ui-layout").remove();
-            }, 100);
+            console.log(response)
+            if (response) {
+                renderMap(response)
+            } else {
+                $("#map-result").html(`<p>登録しました。</p>`);
+            }
         }
     });
 
 }
 
 //Render table body
-let renderTableBody = (listGasVM) => {
-    let result = ``;
-    for (let item of listGasVM) {
-        result += ` 
-            <tr>
-                <td class="name-gasStation w-25" data-long=${item.Longitude} data-lati=${item.Latitude}> <a href="./Feedback/Detail/${item.GasStationId}">${item.GasStationName}</a> </td>
-                <td> ${item.GasType} </td>
-                <td> ${item.DistrictName} </td>
-                <td> ${item.Longitude}, ${item.Latitude} </td>
-                <td class="text-center"><img src="./content/images/${item.Rating}.png" class="img-fluid" /></td>
-                <td >
-                    <div class="d-flex justify-content-between w-100">
-                        <a href="../Gasstation/edit/${item.GasStationId}" class="btn btn-info">Edit</a>
-                        <a href="../Gasstation/delete/${item.GasStationId}" class="btn btn-danger">Del</a>
-                    </div>
-                </td>
-            </tr>
-        `
+
+
+let renderMap = (listGasVM) => {
+    
+    function initMap() {  
+        var map = new google.maps.Map(document.getElementById('map-result'), {
+          zoom: 10,
+          center: new google.maps.LatLng(listGasVM[0].Latitude, listGasVM[0].Longitude),
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+  
+        var infowindow = new google.maps.InfoWindow();
+  
+        var marker, i;
+        console.log(listGasVM[1].Latitude)
+        for (i = 0; i < listGasVM.length; i++) {
+            console.log(listGasVM[i].Latitude)
+          marker = new google.maps.Marker({
+            position: new google.maps.LatLng(listGasVM[i].Latitude, listGasVM[i].Longitude),
+            map: map
+          });
+
+          google.maps.event.addListener(marker, 'click', (function (marker, i) {
+            return function () {
+                window.location = `/Feedback/Detail/${listGasVM[i].GasStationId}`
+            }})(marker, i));
+
+            google.maps.event.addListener(marker, 'mouseout', (function (marker, i) {
+                return function () {
+                  infowindow.setContent(null);
+                  infowindow.open(map, marker);
+                }})(marker, i));
+  
+          google.maps.event.addListener(marker, 'mouseover', (function (marker, i) {
+            return function () {
+              infowindow.setContent(listGasVM[i].GasStationName);
+              infowindow.open(map, marker);
+            }})(marker, i));
+
+
+        }
     }
-    return result;
+    initMap();
+
 }
+
+
 
 //render preload
 let renderWating = () => {
@@ -100,6 +125,7 @@ let renderWating = () => {
     </div>    
     `);
 }
+
 
 //Setup for map
 {
@@ -146,6 +172,7 @@ let renderWating = () => {
 }
 
 var curentPage = 1;
+
 $("body").delegate( ".page-item" , "click", function () {
     let setPage;
     if ($(this).hasClass("controll")) {
@@ -192,54 +219,7 @@ $("body").delegate( ".page-item" , "click", function () {
     }
 });
 
-// $(".page-item").click(function () {
 
-//     let setPage;
-
-//     if ($(this).hasClass("controll")) {
-//         if (!$(this).hasClass("disabled")) {
-//             if ($(this).hasClass("controllerPre")) {
-//                 setPage = curentPage - 1;
-//             }
-//             if ($(this).hasClass("controllerNext")) {
-//                 setPage = curentPage + 1
-//             }
-//             if ($(this).hasClass("controllerFirst")) {
-//                 setPage = 1
-//             }
-//             if ($(this).hasClass("controllerLast")) {
-//                 setPage = $(".page-item").length - 4;
-//             }
-//         } else { return }
-
-//     } else {
-//         setPage = parseInt($(this).children().html()) ? parseInt($(this).children().html()) : curentPage;
-//     }
-
-//     if (setPage != curentPage) {
-//         let $listPageItem = $(".page-item");
-//         for (const item of $listPageItem) {
-//             if ($(item).children().html() == setPage) {
-//                 $(item).addClass("active")
-//             } else { $(item).removeClass("active") }
-//         }
-//         if (setPage == 1) {
-//             $($listPageItem[0]).addClass("disabled");
-//             $($listPageItem[1]).addClass("disabled");
-//         } else { $($listPageItem[0]).removeClass(" disabled"); $($listPageItem[1]).removeClass(" disabled") }
-//         if (setPage == $listPageItem.length - 4) {
-//             $($listPageItem[$listPageItem.length - 2]).addClass("disabled");
-//             $($listPageItem[$listPageItem.length - 1]).addClass("disabled")
-//         } else {
-//             $($listPageItem[$listPageItem.length - 2]).removeClass("disabled");
-//             $($listPageItem[$listPageItem.length - 1]).removeClass("disabled")
-//         }
-//         curentPage = setPage;
-//         let token = $("[name=__RequestVerificationToken]").val();
-//         renderData(token, curentPage);
-//         // renderData(idGastation, curentPage);
-//     }
-// })
 
 let renderPagination = () => {
     $.ajax({

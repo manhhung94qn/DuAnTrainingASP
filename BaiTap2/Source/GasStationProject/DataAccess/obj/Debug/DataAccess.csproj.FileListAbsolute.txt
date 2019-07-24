@@ -33,8 +33,8 @@ C:\Users\HPB\Desktop\DuAnTrainingASP\BaiTap2\Source\GasStationProject\DataAccess
 C:\Users\HPB\Desktop\DuAnTrainingASP\BaiTap2\Source\GasStationProject\DataAccess\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\HPB\Desktop\DuAnTrainingASP\BaiTap2\Source\GasStationProject\DataAccess\bin\Debug\ja\EntityFramework.resources.dll
 C:\Users\HPB\Desktop\DuAnTrainingASP\BaiTap2\Source\GasStationProject\DataAccess\bin\Debug\ja\EntityFramework.SqlServer.resources.dll
-C:\Users\HPB\Desktop\DuAnTrainingASP\BaiTap2\Source\GasStationProject\DataAccess\obj\Debug\DataAccess.csprojAssemblyReference.cache
 C:\Users\HPB\Desktop\DuAnTrainingASP\BaiTap2\Source\GasStationProject\DataAccess\obj\Debug\DataAccess.csproj.CoreCompileInputs.cache
 C:\Users\HPB\Desktop\DuAnTrainingASP\BaiTap2\Source\GasStationProject\DataAccess\obj\Debug\DataAccess.csproj.CopyComplete
 C:\Users\HPB\Desktop\DuAnTrainingASP\BaiTap2\Source\GasStationProject\DataAccess\obj\Debug\DataAccess.dll
 C:\Users\HPB\Desktop\DuAnTrainingASP\BaiTap2\Source\GasStationProject\DataAccess\obj\Debug\DataAccess.pdb
+C:\Users\HPB\Desktop\DuAnTrainingASP\BaiTap2\Source\GasStationProject\DataAccess\obj\Debug\DataAccess.csprojAssemblyReference.cache

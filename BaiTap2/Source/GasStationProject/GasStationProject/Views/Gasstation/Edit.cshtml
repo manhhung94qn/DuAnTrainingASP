@@ -1,7 +1,7 @@
 ﻿@model GasStationProject.Models.GasStationAddVM
 
 @{
-    ViewBag.Title = "Add";
+    ViewBag.Title = "Edit gas station ";
     Layout = "~/Views/Shared/_IndexLayout.cshtml";
     var listDistrist = ViewBag.listDistrist;
     var listGatype = ViewBag.listGasType;
@@ -12,10 +12,10 @@
 @using (Html.BeginForm("Edit", "GasStation"))
 {
     @Html.AntiForgeryToken()
-    @Html.HiddenFor(Model => Model.GasStationId);
+    @Html.HiddenFor(Model => Model.GasStationId)
 
     <div class="form-horizontal">
-        <h4 class="text-center">ガソリンスタンド一登録</h4>
+        <h2 class="text-center mb-5">ガソリンスタンド一登録</h2>
         <hr />
 
         <div class="form-group d-flex">
@@ -123,8 +123,10 @@
             </div>
         </div>
 
-        <div class="form-group d-flex justify-content-md-around mt-4">
-            <div class="col-md-3 order-11">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger text-left w-100 d-block" })
+
+        <div class="form-group d-flex justify-content-md-around mt-0 mb-5">
+            <div class="col-md-3 order-11 mb-5 pb-5 mb-md-0 pb-md-9">
                 <input type="submit" value="登録" class="btn btn-success w-100" />
             </div>
             <div class="col-md-3 order-1">
@@ -134,7 +136,6 @@
             </div>
         </div>
     </div>
-    @Html.ValidationSummary(true, "", new { @class = "text-danger text-left w-100 d-block" })
 }
 
 

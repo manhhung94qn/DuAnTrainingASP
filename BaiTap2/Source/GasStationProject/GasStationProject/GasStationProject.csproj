@@ -49,14 +49,6 @@
     <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="cg-mdk, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d9b21271afcd9499, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\MdkNET\tgMdk\Lib\cg-mdk.dll</HintPath>
-    </Reference>
-    <Reference Include="cg-mdk-dto, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d9b21271afcd9499, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\MdkNET\tgMdk\Lib\cg-mdk-dto.dll</HintPath>
-    </Reference>
     <Reference Include="CommonServiceLocator, Version=2.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.2.0.4\lib\net45\CommonServiceLocator.dll</HintPath>
     </Reference>
@@ -267,6 +259,7 @@
     <Content Include="Content\js\jquery.validate.min.js" />
     <Content Include="Content\js\jquery.validate.unobtrusive.min.js" />
     <Content Include="Content\js\main.js" />
+    <Content Include="Content\js\MapList.js" />
     <Content Include="Content\js\site.js" />
     <Content Include="Content\vendor\animsition\animsition.min.css" />
     <Content Include="Content\vendor\animsition\animsition.min.js" />
@@ -469,6 +462,7 @@
     <Content Include="Views\Gasstation\Edit.cshtml" />
     <Content Include="Views\Gasstation\Delete.cshtml" />
     <Content Include="Views\Feedback\Detail.cshtml" />
+    <Content Include="Views\Home\MapList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

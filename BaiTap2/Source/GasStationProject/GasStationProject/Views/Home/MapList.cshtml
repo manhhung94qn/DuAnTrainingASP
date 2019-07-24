@@ -19,7 +19,7 @@
             Filter
         </div>
         <div class="w-100 text-right">
-            <button class="btn btn-primary ml-3 mb-3 col-md-2">@Html.ActionLink("マップ", "MapList", "Home", null, new { @class = "text-white w-100 d-block" })</button>
+            <button class="btn btn-primary ml-3 mb-3 col-md-2">@Html.ActionLink("View List", "Index", "Home", null, new { @class = "text-white w-100 d-block" })</button>
         </div>
         <div class="card-body">
             <div class="px-lg-5">
@@ -70,70 +70,58 @@
     @* End filter *@
 
     @* Begin table *@
-    <div class="container_table_gas pb-5">
-        @*Begin Form show gas station*@
-        <table class="table table-hover bg-white table-bordered">
-            <thead class="bg-light text-center">
-                <tr>
-                    <th scope="col">ガソリンスタンド名</th>
-                    <th scope="col">種類</th>
-                    <th scope="col">地区</th>
-                    <th scope="col">　Longitude, Latitude</th>
-                    <th scope="col">　評価</th>
-                    <th scope="col">Option</th>
-                </tr>
-            </thead>
-            <tbody class="body-table">
-                @* javascript will process *@
-            </tbody>
-        </table>
-        @*End Form show gas station*@     
-        <div class="render-waiting"></div>
+    <div class="container_map_gas">
+        
+        <div id="map-result"></div>
+        
+    </div>
 
-        <div class="pb-5 mt-3 mb-5 mb-lg-0 d-md-flex pagination-box justify-content-center w-100">
-            <nav aria-label="..." class="mb-5 mb-md-0 pagination-content">
-                <ul class="pagination">
-                    <li class="page-item disabled  controll controllerFirst">
-                        <span class="page-link">First</span>
+
+    @* Begin pagination *@
+    <div class="pb-5 mt-5 d-flex pagination-box justify-content-center w-100">
+        <nav aria-label="...">
+            <ul class="pagination">
+                <li class="page-item disabled  controll controllerFirst">
+                    <span class="page-link">First</span>
+                </li>
+                <li class="page-item disabled  controll controllerPre">
+                    <span class="page-link">Previous</span>
+                </li>
+                <li class="page-item active"><span class="page-link">1</span></li>
+                @if (countPage > 1)
+                {
+                    for (int i = 2; i <= Math.Ceiling((double)countPage / 10); i++)
+                    {
+                        <li class="page-item"><span class="page-link">@(i)</span></li>
+                    }
+                }
+                @if (countPage <= 10)
+                {
+                    <li class="page-item disabled controll controllerNext">
+                        <span class="page-link">Next</span>
                     </li>
-                    <li class="page-item disabled  controll controllerPre">
-                        <span class="page-link">Previous</span>
+                    <li class="page-item disabled  controll controllerLast">
+                        <span class="page-link">Last</span>
                     </li>
-                    <li class="page-item active"><span class="page-link">1</span></li>
-                    @if (countPage > 1)
-                    {
-                        for (int i = 2; i <= Math.Ceiling((double)countPage / 10); i++)
-                        {
-                            <li class="page-item"><span class="page-link">@(i)</span></li>
-                        }
-                    }
-                    @if (countPage <= 10)
-                    {
-                        <li class="page-item disabled controll controllerNext">
-                            <span class="page-link">Next</span>
-                        </li>
-                        <li class="page-item disabled  controll controllerLast">
-                            <span class="page-link">Last</span>
-                        </li>
-                    }
-                    else
-                    {
-                        <li class="page-item controll controllerNext">
-                            <span class="page-link">Next</span>
-                        </li>
-                        <li class="page-item  controll controllerLast">
-                            <span class="page-link">Last</span>
-                        </li>
-                    }
-                </ul>
-            </nav>
-        </div>
+                }
+                else
+                {
+                    <li class="page-item controll controllerNext">
+                        <span class="page-link">Next</span>
+                    </li>
+                    <li class="page-item  controll controllerLast">
+                        <span class="page-link">Last</span>
+                    </li>
+                }
+            </ul>
+        </nav>
     </div>
 
 </div>
 
+
 @section PageScript {
-    @Scripts.Render("~/content/HomeControler")
+    @Scripts.Render("~/content/MapList")
 }
 
 @section PageStyle {

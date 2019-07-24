@@ -1,7 +1,7 @@
 ﻿@model GasStationProject.Models.GasStationAddVM
 
 @{
-    ViewBag.Title = "Add";
+    ViewBag.Title = "Add new gastation";
     Layout = "~/Views/Shared/_IndexLayout.cshtml";
     var listDistrist = ViewBag.listDistrist;
     var listGatype = ViewBag.listGasType;
@@ -13,8 +13,8 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4 class="text-center">ガソリンスタンド一登録</h4>
+    <div class="form-horizontal pb-5">
+        <h2 class="text-center mb-5">ガソリンスタンド一登録</h2>
         <hr />
 
         <div class="form-group d-flex">
@@ -69,7 +69,7 @@
                     }
                 </select>
                 @Html.ValidationMessageFor(model => model.District, "", new { @class = "text-danger" })
-                @Html.EditorFor(Model => Model.District, new { htmlAttributes = new { style = "z-index: -100; width:0; height:0"  } })
+                @Html.EditorFor(Model => Model.District, new { htmlAttributes = new { style = "z-index: -100; width:0; height:0" } })
             </div>
         </div>
 
@@ -99,27 +99,24 @@
                         <label class="form-check-label" for=@item.TypeCode> <img src="~/Content/images/@(item.TypeText).png" />   @item.TypeText</label>
                     </div>
                 }
-                <br/>
+                <br />
                 @Html.EditorFor(model => model.Rating, new { htmlAttributes = new { style = "z-index: -100; width:0; height:0" } })
-                @Html.ValidationMessageFor(model => model.Rating, "", new { @class = "text-danger"})
+                @Html.ValidationMessageFor(model => model.Rating, "", new { @class = "text-danger" })
             </div>
         </div>
-
-
-
-
-        <div class="form-group d-flex justify-content-md-around mt-4">
-            <div class="col-md-3 order-11">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger text-left w-100 d-block" })
+        <div class="form-group d-flex justify-content-md-around mb-5 mb-md-0">
+            <div class="col-md-3 order-11 mb-5 mb-md-0">
                 <input type="submit" value="登録" class="btn btn-success w-100" />
             </div>
             <div class="col-md-3 order-1">
                 <button class="btn btn-danger w-100">
-                    @Html.ActionLink("戻る", "Index", "Home" , null , htmlAttributes: new {  @class="text-white d-block w-100" } )
+                    @Html.ActionLink("戻る", "Index", "Home", null, htmlAttributes: new { @class = "text-white d-block w-100" })
                 </button>
             </div>
         </div>
     </div>
-    @Html.ValidationSummary(true, "", new { @class = "text-danger text-left w-100 d-block" })
+   
 }
 
 
